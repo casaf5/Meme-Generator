@@ -12,7 +12,7 @@ var gMeme = {
     lines: [{
         id: 0,
         txt: 'Top Text Line',
-        size: 40, align: 'center',
+        size: 90, align: 'center',
         color: 'black',
         posX: 250,
         posY: 50
@@ -66,7 +66,7 @@ function addNewTxt() {
     })
     gMeme.selectedLineIdx = gMeme.lines.length - 1
     drawMeme()
-    
+
 }
 
 function setCanvasMeme(elImg) {
@@ -95,7 +95,6 @@ function drawMeme() {
 function onChangeFontSize(diff) {
     var focusedLine = getLine(gMeme.selectedLineIdx)
     focusedLine.size += diff
-    gCtx.clearRect(0, 0, 500, 500)
     drawMeme()
 }
 
@@ -105,9 +104,25 @@ function onChangeTextFocus() {
     drawMeme()
 }
 
+function focusByClick(ev) {
+    console.log('clicked')
+    const { offsetX: x, offsetY: y } = ev
+    var clickedIdx = gMeme.lines.findIndex(line => {
+        var lineWidth = getWidth(line)
+        if (x >= line.posX - lineWidth / 2 && x <= lineWidth && y >= line.posY && y <= line.posY + line.size)
+            return line
+    })
+    if (clickedIdx !== -1) {
+        gMeme.selectedLineIdx = clickedIdx
+        drawMeme()
+    }
+
+}
+
 function focusOnText(focusedLine) {
-    var currWidth = gCtx.measureText(focusedLine.txt).width
+    var currWidth = getWidth(focusedLine)
     gCtx.beginPath()
+    gCtx.strokeStyle = 'white'
     gCtx.rect(focusedLine.posX - currWidth / 2, focusedLine.posY, currWidth, focusedLine.size)
     gCtx.stroke()
 }
@@ -126,7 +141,10 @@ function onChangeLineLocation(diff, posToChange) {
     else {
         focusedLine.posY += diff
     }
-    gCtx.clearRect(0, 0, 500, 500)
     drawMeme()
 }
 
+function getWidth(line) {
+    gCtx.font = `${line.size}px Impact`
+    return gCtx.measureText(line.txt).width
+}
