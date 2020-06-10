@@ -1,26 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meme Generator</title>
     <link rel="stylesheet" href="/css/main.css">
 </head>
-<body onload="init()">
-    <canvas id="my-canvas" width="500" height="500" style="border:1px solid black;" 
-    onmousedown="focusByClick(event)"></canvas>
 
-    <img src="./memes/10.jpg" id="10" alt="meme10" width="200" height="200" onclick="setCanvasMeme(this)"/>
-    <img src="./memes/5.jpg" id="5" alt="meme5" width="200" height="200" onclick="setCanvasMeme(this)"/>
-    <input type="text" id="user-txt" oninput="onEditNewTxt(this)">
-    <button onclick="onChangeFontSize(10)">Font Size Up</button>
+<body onload1="init()">
+    <header>
+        <div class="header-container container flex space-between">
+            <div class="logo">Logo</div>
+            <ul class="main-nav clean-list flex space-between">
+                <li><a>Link1</a></li>
+                <li><a>Link2</a></li>
+                <li><a>Link3</a></li>
+            </ul>
+        </div>
+
+    </header>
+    <main>
+        <div class="search container flex space-between">
+            <div class="search-bar">search bar</div>
+            <div class="search-words">words</div>
+        </div>
+        <div class="image-container container">
+                Images
+        </div>
+    </main>
+
+    <footer>
+        <div class="my-profile container">About me </div>
+    </footer>
+
+
+
+
+
+
+
+
+    <!-- <canvas id="my-canvas" width="500" height="500" style="border:1px solid black;" 
+    onmousedown="focusByClick(event)"></canvas> -->
+    <!-- <input type="text" id="user-txt" oninput="onEditNewTxt(this)"> -->
+    <!-- <button onclick="onChangeFontSize(10)">Font Size Up</button>
     <button onclick="onChangeFontSize(-10)">Font Size Down</button>
     <button onclick="onChangeTextFocus()">switch focus</button>
     <button onclick="onChangeLineLocation(-50,'y')">Move Up</button>
     <button onclick="onChangeLineLocation(50,'y')">Move Down</button>
     <button onclick="onChangeLineLocation(50,'x')">Move Right</button>
     <button onclick="onChangeLineLocation(-50,'x')">Move Left</button>
-    <button onclick="addNewTxt()">Add New Text!</button>
+    <button onclick="addNewTxt()">Add New Text!</button> -->
+    <script src="js/meme-controller.js"></script>
     <script src="/js/main.js"></script>
 </body>
+
 </html>

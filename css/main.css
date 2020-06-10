@@ -1,15 +1,65 @@
-
-*{
+* {
     box-sizing: border-box;
 }
+
 /* @font-face {
     font-family: im;
     src: url('/css/fonts/eurofurence/eurof35.ttf');
 } */
-body{
-    margin:0;
-    padding:0;
+
+body {
+    margin: 0;
+    padding: 0;
 }
 
+header {
+    width: 100%;
+    background-color: rgb(1, 104, 104);
+}
 
+.header-container {
+    margin: 0 auto;
+}
 
+/* NAV */
+
+/* IMAGE-CONTAINER */
+
+.image-container {
+    text-align: center;
+    margin:10px auto;
+    border: 3px solid black;
+}
+
+/* HELPERS */
+
+.container {
+    max-width: 980px;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex.space-between {
+    justify-content: space-between;
+}
+
+.flex.col {
+    flex-direction: column;
+}
+
+.clean-list {
+    list-style: none;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    padding-inline-start: 0;
+    padding-inline-end: 0;
+}
+
+a {
+    text-decoration: none;
+}

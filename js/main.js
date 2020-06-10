@@ -27,19 +27,15 @@ var gMeme = {
     }]
 }
 
-
 var gSettings = {
     color: 'black',
     shape: 'line',
     opacity: 100,
 }
 function init() {
-    setCanvas()
-    drawMeme()
-}
-function setCanvas() {
     gElCanvas = document.getElementById('my-canvas')
     gCtx = gElCanvas.getContext('2d')
+    drawMeme()
 }
 
 function onEditNewTxt(elTxt) {
@@ -107,9 +103,10 @@ function onChangeTextFocus() {
 function focusByClick(ev) {
     console.log('clicked')
     const { offsetX: x, offsetY: y } = ev
+    console.log(x,y)
     var clickedIdx = gMeme.lines.findIndex(line => {
         var lineWidth = getWidth(line)
-        if (x >= line.posX - lineWidth / 2 && x <= lineWidth && y >= line.posY && y <= line.posY + line.size)
+        if (x >= line.posX - lineWidth / 2 && x <= (line.posX - lineWidth / 2)+lineWidth && y >= line.posY && y <= line.posY + line.size)
             return line
     })
     if (clickedIdx !== -1) {
@@ -126,9 +123,6 @@ function focusOnText(focusedLine) {
     gCtx.rect(focusedLine.posX - currWidth / 2, focusedLine.posY, currWidth, focusedLine.size)
     gCtx.stroke()
 }
-
-
-
 
 function getLine(lineId) {
     return gMeme.lines.find(line => line.id === lineId)
