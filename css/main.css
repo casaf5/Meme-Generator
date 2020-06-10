@@ -1,6 +1,11 @@
+
 *{
     box-sizing: border-box;
 }
+/* @font-face {
+    font-family: im;
+    src: url('/css/fonts/eurofurence/eurof35.ttf');
+} */
 body{
     margin:0;
     padding:0;

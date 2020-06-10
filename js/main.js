@@ -2,8 +2,21 @@
 
 var gElCanvas
 var gCtx
-var gIsClicked=false;
-var gLastPoint={x:0,y:0}
+var gIsClicked = false;
+var gLastPoint = { x: 0, y: 0 }
+var gKeywords = { 'happy': 12, 'funny puk': 1 }
+var gImgs = [{ id: 1, url: 'img/popo.jpg', keywords: ['happy'] }];
+var gMeme = {
+    selectedImgId: 5,
+    selectedLineIdx: 0,
+    lines: [{
+        txt: 'I never eat Falafel',
+        size: 20, align: 'left',
+        color: 'red'
+    }]
+}
+
+
 var gSettings = {
     color: 'black',
     shape: 'line',
@@ -26,7 +39,6 @@ function init() {
 function setCanvas() {
     gElCanvas = document.getElementById('my-canvas')
     gCtx = gElCanvas.getContext('2d')
-
 }
 
 function startDraw(ev) {
@@ -56,6 +68,13 @@ function drawLine(x, y) {
     gCtx.lineTo(x, y)
     gCtx.closePath()
     gCtx.stroke()
+}
+
+function drawTxt() {
+    var userTxt = document.getElementById('user-txt').value
+    gCtx.font = '30px Impact'
+    gCtx.fillText(userTxt, 250, 250)
+
 }
 
 
