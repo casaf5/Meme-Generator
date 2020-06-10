@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meme Generator</title>
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body onload="init()">
@@ -14,21 +14,26 @@
         <div class="header-container container flex space-between">
             <div class="logo">Logo</div>
             <ul class="main-nav clean-list flex space-between">
-                <li><a>Link1</a></li>
-                <li><a>Link2</a></li>
-                <li><a>Link3</a></li>
+                <li><a>Gallary</a></li>
+                <li><a>Your Memes</a></li>
+                <li><a>About</a></li>
             </ul>
         </div>
     </header>
-     <!-- MODAL -->
-     <div class="modal flex space-between">
+    <!-- MODAL -->
+    <div class="modal flex space-between" id="meme-modal">
         <div class="meme-container flex col space-between ">
-            <canvas id="my-canvas" width="500" height="500" style="border:1px solid black;" 
-            onmousedown="focusByClick(event)"></canvas>
-            <button>Reset Meme</button>
+            <canvas id="my-canvas" width="500" height="500" style="border:1px solid black;"
+                onmousedown="focusByClick(event)"></canvas>
+            <button class="btn-reset">Reset Meme</button>
+            <div class="meme-actions flex space-between">
+                <button >Share</button>
+                <button>Save</button>
+                <button>Download</button>
+            </div>
         </div>
         <div class="meme-settings flex col space-around align-items">
-            <input type="text" id="user-txt" oninput="onEditNewTxt(this)"> 
+            <input type="text" id="user-txt" oninput="onEditNewTxt(this)">
             <button onclick="onChangeFontSize(10)">Font Size Up</button>
             <button onclick="onChangeFontSize(-10)">Font Size Down</button>
             <button onclick="onChangeTextFocus()">switch focus</button>
@@ -39,7 +44,7 @@
             <button onclick="addNewTxt()">Add New Text!</button>
         </div>
     </div>
-<!-- MODAL-END -->
+    <!-- MODAL-END -->
     <main>
         <div class="search container flex space-between">
             <div class="search-bar flex center">
@@ -50,16 +55,16 @@
             </div>
         </div>
         <div class="image-container container">
-                Images
+            Images
         </div>
     </main>
 
-   
+
     <footer>
-        <div class="my-profile container">About me </div>
+        <div class="about container">About me </div>
     </footer>
 
-    <script src="/js/main.js"></script>
+    <script src="js/main.js"></script>
     <script src="js/meme-controller.js"></script>
 </body>
 

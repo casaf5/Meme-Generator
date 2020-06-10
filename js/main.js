@@ -53,7 +53,6 @@ var gSettings = {
 function init() {
     gElCanvas = document.getElementById('my-canvas')
     gCtx = gElCanvas.getContext('2d')
-    // drawMeme()
     rednerPictures()
 }
 
@@ -69,7 +68,6 @@ function onEditNewTxt(elTxt) {
     focusOnText(focusedLine)
 
 }
-
 function addNewTxt() {
     gMeme.lines.push({
         id: gMeme.lines.length,
@@ -83,7 +81,6 @@ function addNewTxt() {
     drawMeme()
 
 }
-
 function setCanvasMeme(elImg) {
     gMeme.selectedImgId = +elImg.id
     drawMeme()

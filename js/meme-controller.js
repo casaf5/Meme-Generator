@@ -2,7 +2,8 @@ function rednerPictures() {
     var elImgCon = document.querySelector('.image-container')
     var strHTML = ''
     for (var i = 1; i < 19; i++) {
-        strHTML += `<img src='../memes/${i}.jpg' id="${i}" onclick="toggleModal(this)"/>`
+        strHTML += `<a href="#meme-modal"><img src='../memes/${i}.jpg' id="${i}" onclick="toggleModal(this)"/></a>`
+                   
     }
     elImgCon.innerHTML = strHTML
 }
