@@ -33,20 +33,28 @@
                 onmousedown="focusByClick(event)"></canvas>
             <button class="btn-reset">Reset Meme</button>
             <div class="meme-actions flex space-between">
-                <button >Share</button>
-                <button>Save</button>
-                <button>Download</button>
+                <button class="btn-action">Share</button>
+                <button class="btn-action">Save</button>
+                <a class="btn-action" href="#" onclick="onDownloadCanvas(this)" download="">Download</a>
             </div>
         </div>
-        <div class="meme-settings flex col space-around align-items">
-            <input type="text" id="user-txt" oninput="onEditNewTxt(this)">
-            <button onclick="onChangeFontSize(10)">Font Size Up</button>
-            <button onclick="onChangeFontSize(-10)">Font Size Down</button>
+        <div class="meme-settings flex col">
+            <input type="text" id="user-txt" oninput="onEditNewTxt(this)" placeholder="Type Text Here">
+            <div class="text-location flex col">
+                <h5>Text Location Control:</h5>
+                <div class="flex space-between">
+                <button onclick="onChangeLineLocation(-50,'y')">Move Up</button>
+                <button onclick="onChangeLineLocation(50,'y')">Move Down</button>
+                <button onclick="onChangeLineLocation(50,'x')">Move Right</button>
+                <button onclick="onChangeLineLocation(-50,'x')">Move Left</button>
+                </div>
+            </div>
+            <button onclick="changeTextAlign('right')"><i class="fas fa-align-right fa-3x"></i></button>
+            <button onclick="changeTextAlign('center')"><i class="fas fa-align-justify fa-3x"></i></button>
+            <button onclick="changeTextAlign('left')"><i class="fas fa-align-left fa-3x"></i></button>
+            <button onclick="onChangeFontSize(10)"><i class="fas fa-plus fa-3x"></i></button>
+            <button onclick="onChangeFontSize(-10)"><i class="fas fa-minus fa-3x"></i></button>
             <button onclick="onChangeTextFocus()">switch focus</button>
-            <button onclick="onChangeLineLocation(-50,'y')">Move Up</button>
-            <button onclick="onChangeLineLocation(50,'y')">Move Down</button>
-            <button onclick="onChangeLineLocation(50,'x')">Move Right</button>
-            <button onclick="onChangeLineLocation(-50,'x')">Move Left</button>
             <button onclick="addNewTxt()">Add New Text!</button>
         </div>
     </div>
@@ -69,7 +77,7 @@
     <footer>
         <div class="about container" id="about">About me </div>
     </footer>
-    
+
     <script src="https://kit.fontawesome.com/f334b000b4.js" crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
     <script src="js/meme-controller.js"></script>

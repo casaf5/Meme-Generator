@@ -14,3 +14,10 @@ function toggleModal(elImg) {
     if (document.querySelector('.modal').classList.contains('open')) setCanvasMeme(elImg)
 
 }
+
+function onDownloadCanvas(elLink) {
+    const data = gElCanvas.toDataURL();
+    elLink.href = data;
+    elLink.download = 'my-meme';
+
+}

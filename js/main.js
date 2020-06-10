@@ -126,9 +126,9 @@ function focusByClick(ev) {
     })
     if (clickedIdx !== -1) {
         gMeme.selectedLineIdx = clickedIdx
-        document.getElementById('user-txt').value = setInputBoxValue(clickedIdx)
+        document.getElementById('user-txt').value = setInputBoxValue(clickedIdx);
+        document.querySelector('#user-txt').focus();
         drawMeme()
-        document.getElementById('user-txt').focus()
     }
 
 }
@@ -137,7 +137,7 @@ function setInputBoxValue(lineIdx) {
     return line.txt
 }
 
-function focusOnText(focusedLine) {
+function focusOnText(focusedLine) { //!fix align bux 
     var currWidth = getWidth(focusedLine)
     gCtx.beginPath()
     gCtx.strokeStyle = 'white'
@@ -162,4 +162,10 @@ function onChangeLineLocation(diff, posToChange) {
 function getWidth(line) {
     gCtx.font = `${line.size}px memeimpact`
     return gCtx.measureText(line.txt).width
+}
+
+function changeTextAlign(align) {
+    var line = getLine(gMeme.selectedLineIdx)
+    line.align = align;
+    drawMeme()
 }
