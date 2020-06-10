@@ -9,7 +9,17 @@
 <body onload="init()">
     <canvas id="my-canvas" width="500" height="500" style="border:1px solid black;" 
     onmousemove="startDraw(event)"></canvas>
+
+    <img src="./memes/10.jpg" id="10" alt="meme10" width="200" height="200" onclick="setCanvasMeme(this)"/>
+    <img src="./memes/5.jpg" id="5" alt="meme5" width="200" height="200" onclick="setCanvasMeme(this)"/>
     <input type="text" id="user-txt">
+    <button onclick="onChangeFontSize(10)">Font Size Up</button>
+    <button onclick="onChangeFontSize(-10)">Font Size Down</button>
+    <button onclick="onChangeTextFocus()">switch focus</button>
+    <button onclick="onChangeLineLocation(-50,'y')">Move Up</button>
+    <button onclick="onChangeLineLocation(50,'y')">Move Down</button>
+    <button onclick="onChangeLineLocation(50,'x')">Move Right</button>
+    <button onclick="onChangeLineLocation(-50,'x')">Move Left</button>
     <button onclick="drawTxt()">Draw!</button>
     <script src="/js/main.js"></script>
 </body>
