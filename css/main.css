@@ -6,13 +6,13 @@
     font-family: piedra;
     src: url('../css/fonts/Piedra-Regular.ttf');
 }
+
 @font-face {
     font-family: memeimpact;
     src: url('../css/fonts/impact.ttf');
-    color:black;
+    color: black;
     font-weight: 800;
 }
-
 
 body {
     margin: 0;
@@ -32,25 +32,26 @@ header {
 
 /* NAV */
 
-.logo img{
+.logo img {
     height: 65px;
     width: 300px;
 }
 
 .main-nav li {
     height: 70px;
-    padding:10px;
-    border-inline-start:2px solid black;
+    padding: 10px;
+    border-inline-start: 2px solid black;
 }
+
 .main-nav li .fas {
     padding-right: 10px;
 }
-.main-nav li:last-child{
-    border-inline-end:2px solid black;
 
+.main-nav li:last-child {
+    border-inline-end: 2px solid black;
 }
 
-.main-nav li a:not(:last-child){
+.main-nav li a:not(:last-child) {
     margin-inline-end: 5px;
 }
 
@@ -66,24 +67,25 @@ header {
     text-align: center;
     align-items: center;
 }
-.search-bar .fas{
+
+.search-bar .fas {
     position: relative;
-    right:42px;
+    right: 42px;
     cursor: pointer;
 }
-
 
 .search-words {
     flex-basis: 70%;
     letter-spacing: 1px;
     border: 2px solid black;
 }
-#search-box{
+
+#search-box {
     width: 280px;
     height: 50px;
     border-radius: 20px;
     font-size: 1.5rem;
-    padding:10px;
+    padding: 10px;
     outline: none;
 }
 
@@ -102,6 +104,7 @@ header {
     grid-gap: 10px;
     padding: 25px;
 }
+
 .image-container img {
     width: 100%;
     height: 100%;
@@ -110,8 +113,8 @@ header {
     transition: transform .3s;
 }
 
-.image-container img:hover{
-    transform: translate(-20px,-5px);
+.image-container img:hover {
+    transform: translate(-20px, -5px);
 }
 
 /* MEME- MODAL */
@@ -149,11 +152,10 @@ header {
     font-size: 1.3rem;
     font-family: piedra, sans-serif;
     border-radius: 20px;
-    border:2px solid black;
+    border: 2px solid black;
     text-align: center;
     background-color: rgba(255, 248, 220, 0.801);
     transition: all .3s;
-    
 }
 
 .meme-container .meme-actions .btn-action:hover {
@@ -164,38 +166,61 @@ header {
 .meme-container .btn-reset {
     background-color: rgb(115, 131, 167);
     font-family: piedra, sans-serif;
-    padding:10px;
+    padding: 10px;
     font-size: 1.4rem;
     border-radius: 20px;
     letter-spacing: 0.9px;
     transition: all .2s;
 }
 
-.meme-container .btn-reset:hover{
+.meme-container .btn-reset:hover {
     background-color: crimson;
     cursor: pointer;
-
 }
 
 /* MODAL SETTINGS EDITOR */
-.meme-settings{
+
+.meme-settings {
     flex-basis: 50%;
 }
-#user-txt{
+
+#user-txt {
     width: 80%;
     height: 30px;
-    margin:20px auto;
+    margin: 20px auto;
     text-align: center;
     font-size: 1.5rem;
     letter-spacing: 0.9px;
     border-radius: 20px;
-    padding:20px;
+    padding: 20px;
     outline: none;
 }
-.text-location h5{
+
+.section-head {
     align-self: center;
     font-size: 2rem;
-    margin:0;
+    margin: 10px 0;
+}
+
+.meme-settings .fas {
+    transition: transform .2s;
+}
+
+.meme-settings .fas:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.meme-settings input~.fas {
+    position: absolute;
+    top: 25px;
+    right: 15px
+}
+
+.meme-settings>.fas {
+    position: absolute;
+    top: 27px;
+    right: 497px;
 }
 
 /* ABOUT */
@@ -249,13 +274,11 @@ header {
     padding-inline-end: 0;
 }
 
-a{
+a {
     text-decoration: none;
-    color:black;
+    color: black;
     cursor: pointer;
 }
-
-
 
 .screen {
     position: fixed;

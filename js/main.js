@@ -117,8 +117,8 @@ function onChangeTextFocus() {
 }
 
 function focusByClick(ev) {
+    ev.preventDefault()
     const { offsetX: x, offsetY: y } = ev
-    console.log(x, y)
     var clickedIdx = gMeme.lines.findIndex(line => {
         var lineWidth = getWidth(line)
         if (x >= line.posX - lineWidth / 2 && x <= (line.posX - lineWidth / 2) + lineWidth && y >= line.posY && y <= line.posY + line.size)
@@ -127,7 +127,7 @@ function focusByClick(ev) {
     if (clickedIdx !== -1) {
         gMeme.selectedLineIdx = clickedIdx
         document.getElementById('user-txt').value = setInputBoxValue(clickedIdx);
-        document.querySelector('#user-txt').focus();
+        document.getElementById('user-txt').focus();
         drawMeme()
     }
 
@@ -167,5 +167,10 @@ function getWidth(line) {
 function changeTextAlign(align) {
     var line = getLine(gMeme.selectedLineIdx)
     line.align = align;
+    drawMeme()
+}
+
+function removeLine() {
+    gMeme.lines.splice(gMeme.selectedLineIdx, 1)
     drawMeme()
 }
