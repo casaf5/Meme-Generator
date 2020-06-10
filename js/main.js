@@ -5,7 +5,23 @@ var gCtx
 var gIsClicked = false;
 var gLastPoint = { x: 0, y: 0 }
 var gKeywords = { 'happy': 12, 'funny puk': 1 }
-var gImgs = [{ id: 5, url: './memes/5.jpg', keywords: ['happy'] }, { id: 10, url: './memes/10.jpg', keywords: ['happy'] }];
+var gImgs = [{ id: 1, url: './memes/1.jpg', keywords: ['happy'] },
+             { id: 2, url: './memes/2.jpg', keywords: ['happy'] },
+             { id: 1, url: './memes/3.jpg', keywords: ['happy'] },
+             { id: 2, url: './memes/4.jpg', keywords: ['happy'] },
+             { id: 1, url: './memes/5.jpg', keywords: ['happy'] },
+             { id: 2, url: './memes/6.jpg', keywords: ['happy'] },
+             { id: 1, url: './memes/7.jpg', keywords: ['happy'] },
+             { id: 2, url: './memes/8.jpg', keywords: ['happy'] },
+             { id: 1, url: './memes/9.jpg', keywords: ['happy'] },
+             { id: 2, url: './memes/1.jpg', keywords: ['happy'] },
+             { id: 1, url: './memes/5.jpg', keywords: ['happy'] },
+             { id: 2, url: './memes/10.jpg', keywords: ['happy'] },
+             { id: 1, url: './memes/5.jpg', keywords: ['happy'] },
+             { id: 2, url: './memes/10.jpg', keywords: ['happy'] },
+             { id: 1, url: './memes/5.jpg', keywords: ['happy'] },
+             { id: 2, url: './memes/10.jpg', keywords: ['happy'] },
+];
 var gMeme = {
     selectedImgId: 5,
     selectedLineIdx: 0,
@@ -33,9 +49,10 @@ var gSettings = {
     opacity: 100,
 }
 function init() {
-    gElCanvas = document.getElementById('my-canvas')
-    gCtx = gElCanvas.getContext('2d')
-    drawMeme()
+    // gElCanvas = document.getElementById('my-canvas')
+    // gCtx = gElCanvas.getContext('2d')
+    // drawMeme()
+    rednerPictures()
 }
 
 function onEditNewTxt(elTxt) {
@@ -103,10 +120,10 @@ function onChangeTextFocus() {
 function focusByClick(ev) {
     console.log('clicked')
     const { offsetX: x, offsetY: y } = ev
-    console.log(x,y)
+    console.log(x, y)
     var clickedIdx = gMeme.lines.findIndex(line => {
         var lineWidth = getWidth(line)
-        if (x >= line.posX - lineWidth / 2 && x <= (line.posX - lineWidth / 2)+lineWidth && y >= line.posY && y <= line.posY + line.size)
+        if (x >= line.posX - lineWidth / 2 && x <= (line.posX - lineWidth / 2) + lineWidth && y >= line.posY && y <= line.posY + line.size)
             return line
     })
     if (clickedIdx !== -1) {

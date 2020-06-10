@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/main.css">
 </head>
 
-<body onload1="init()">
+<body onload="init()">
     <header>
         <div class="header-container container flex space-between">
             <div class="logo">Logo</div>
@@ -18,42 +18,48 @@
                 <li><a>Link3</a></li>
             </ul>
         </div>
-
     </header>
+     <!-- MODAL -->
+     <div class="modal flex space-between">
+        <div class="meme-container flex col space-between">
+            <canvas id="my-canvas" width="500" height="500" style="border:1px solid black;" 
+            onmousedown="focusByClick(event)"></canvas>
+            <button>Reset Meme</button>
+        </div>
+        <div class="meme-settings flex col space-between align-items">
+            <input type="text" id="user-txt" oninput="onEditNewTxt(this)"> 
+            <button onclick="onChangeFontSize(10)">Font Size Up</button>
+            <button onclick="onChangeFontSize(-10)">Font Size Down</button>
+            <button onclick="onChangeTextFocus()">switch focus</button>
+            <button onclick="onChangeLineLocation(-50,'y')">Move Up</button>
+            <button onclick="onChangeLineLocation(50,'y')">Move Down</button>
+            <button onclick="onChangeLineLocation(50,'x')">Move Right</button>
+            <button onclick="onChangeLineLocation(-50,'x')">Move Left</button>
+            <button onclick="addNewTxt()">Add New Text!</button>
+        </div>
+    </div>
+<!-- MODAL-END -->
     <main>
         <div class="search container flex space-between">
-            <div class="search-bar">search bar</div>
-            <div class="search-words">words</div>
+            <div class="search-bar flex center">
+                <input type="text" id="search-box" placeholder="Search Your Meme">
+            </div>
+            <div class="search-words flex center">
+                happy,hat,boy,women....
+            </div>
         </div>
         <div class="image-container container">
                 Images
         </div>
     </main>
 
+   
     <footer>
         <div class="my-profile container">About me </div>
     </footer>
 
-
-
-
-
-
-
-
-    <!-- <canvas id="my-canvas" width="500" height="500" style="border:1px solid black;" 
-    onmousedown="focusByClick(event)"></canvas> -->
-    <!-- <input type="text" id="user-txt" oninput="onEditNewTxt(this)"> -->
-    <!-- <button onclick="onChangeFontSize(10)">Font Size Up</button>
-    <button onclick="onChangeFontSize(-10)">Font Size Down</button>
-    <button onclick="onChangeTextFocus()">switch focus</button>
-    <button onclick="onChangeLineLocation(-50,'y')">Move Up</button>
-    <button onclick="onChangeLineLocation(50,'y')">Move Down</button>
-    <button onclick="onChangeLineLocation(50,'x')">Move Right</button>
-    <button onclick="onChangeLineLocation(-50,'x')">Move Left</button>
-    <button onclick="addNewTxt()">Add New Text!</button> -->
-    <script src="js/meme-controller.js"></script>
     <script src="/js/main.js"></script>
+    <script src="js/meme-controller.js"></script>
 </body>
 
 </html>
