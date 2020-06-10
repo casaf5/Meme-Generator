@@ -31,7 +31,7 @@ var gMeme = {
         id: 0,
         txt: 'Top Text Line',
         size: 90, align: 'center',
-        color: 'black',
+        color: 'white',
         posX: 250,
         posY: 50
     },
@@ -39,7 +39,7 @@ var gMeme = {
         id: 1,
         txt: 'Bottom Text Line',
         size: 40, align: 'center',
-        color: 'black',
+        color: 'white',
         posX: 250,
         posY: 450
     }]
@@ -59,7 +59,7 @@ function init() {
 function onEditNewTxt(elTxt) {
     var focusedLine = getLine(gMeme.selectedLineIdx)
     focusedLine.txt = elTxt.value
-    gCtx.font = `${focusedLine.size}px Impact`
+    gCtx.font = `${focusedLine.size}px memeimpact`
     gCtx.align = `${focusedLine.align}`
     gCtx.textBaseline = "top"
     gCtx.fillText(focusedLine.txt, focusedLine.posX, focusedLine.posY,
@@ -73,7 +73,7 @@ function addNewTxt() {
         id: gMeme.lines.length,
         txt: 'Enter New Text',
         size: 30, align: 'center',
-        color: 'black',
+        color: 'white',
         posX: gElCanvas.width / 2,
         posY: gElCanvas.height / 2,
     })
@@ -95,7 +95,7 @@ function setImage(imgId) {
 function drawMeme() {
     setImage(gMeme.selectedImgId)
     gMeme.lines.forEach(line => {
-        gCtx.font = `${line.size}px Impact`
+        gCtx.font = `${line.size}px memeimpact`
         gCtx.fillStyle = line.color
         gCtx.textAlign = line.align
         gCtx.textBaseline = "top"
@@ -160,6 +160,6 @@ function onChangeLineLocation(diff, posToChange) {
 }
 
 function getWidth(line) {
-    gCtx.font = `${line.size}px Impact`
+    gCtx.font = `${line.size}px memeimpact`
     return gCtx.measureText(line.txt).width
 }

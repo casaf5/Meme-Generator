@@ -4,8 +4,15 @@
 
 @font-face {
     font-family: piedra;
-    src: url('/css/fonts/Piedra-Regular.ttf');
+    src: url('../css/fonts/Piedra-Regular.ttf');
 }
+@font-face {
+    font-family: memeimpact;
+    src: url('../css/fonts/impact.ttf');
+    color:black;
+    font-weight: 800;
+}
+
 
 body {
     margin: 0;
@@ -15,7 +22,8 @@ body {
 
 header {
     width: 100%;
-    background-color: rgb(1, 104, 104);
+    background-color: rgba(104, 1, 1, 0.85);
+    box-shadow: 0px 6px #fb9624;
 }
 
 .header-container {
@@ -23,6 +31,28 @@ header {
 }
 
 /* NAV */
+
+.logo img{
+    height: 65px;
+    width: 300px;
+}
+
+.main-nav li {
+    height: 70px;
+    padding:10px;
+    border-inline-start:2px solid black;
+}
+.main-nav li .fas {
+    padding-right: 10px;
+}
+.main-nav li:last-child{
+    border-inline-end:2px solid black;
+
+}
+
+.main-nav li a:not(:last-child){
+    margin-inline-end: 5px;
+}
 
 /* SEARCH-SECTION */
 
@@ -36,10 +66,25 @@ header {
     text-align: center;
     align-items: center;
 }
+.search-bar .fas{
+    position: relative;
+    right:42px;
+    cursor: pointer;
+}
+
 
 .search-words {
     flex-basis: 70%;
     letter-spacing: 1px;
+    border: 2px solid black;
+}
+#search-box{
+    width: 280px;
+    height: 50px;
+    border-radius: 20px;
+    font-size: 1.5rem;
+    padding:10px;
+    outline: none;
 }
 
 /* IMAGE-CONTAINER */
@@ -88,7 +133,7 @@ header {
 .meme-container .meme-actions button {
     flex-basis: 30%;
     padding: 5px;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-family: piedra, sans-serif;
     border-radius: 20px;
     transition: all .3s;
@@ -100,8 +145,19 @@ header {
 }
 
 .meme-container .btn-reset {
-    background-color: crimson;
+    background-color: rgb(115, 131, 167);
     font-family: piedra, sans-serif;
+    padding:10px;
+    font-size: 1.4rem;
+    border-radius: 20px;
+    letter-spacing: 0.9px;
+    transition: all .2s;
+}
+
+.meme-container .btn-reset:hover{
+    background-color: crimson;
+    cursor: pointer;
+
 }
 
 .screen {
@@ -171,13 +227,20 @@ header {
     padding-inline-end: 0;
 }
 
-a {
+a{
     text-decoration: none;
+    color:black;
+    cursor: pointer;
 }
 
-img {
+.image-container img {
     width: 100%;
     height: 100%;
     border: 2px solid black;
     cursor: pointer;
+    transition: transform .3s;
+}
+
+.image-container img:hover{
+    transform: translate(-20px,-5px);
 }
