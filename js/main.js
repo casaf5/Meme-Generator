@@ -5,25 +5,27 @@ var gCtx
 var gIsClicked = false;
 var gLastPoint = { x: 0, y: 0 }
 var gKeywords = { 'happy': 12, 'funny puk': 1 }
-var gImgs = [{ id: 1, url: './memes/1.jpg', keywords: ['happy'] },
-             { id: 2, url: './memes/2.jpg', keywords: ['happy'] },
-             { id: 1, url: './memes/3.jpg', keywords: ['happy'] },
-             { id: 2, url: './memes/4.jpg', keywords: ['happy'] },
-             { id: 1, url: './memes/5.jpg', keywords: ['happy'] },
-             { id: 2, url: './memes/6.jpg', keywords: ['happy'] },
-             { id: 1, url: './memes/7.jpg', keywords: ['happy'] },
-             { id: 2, url: './memes/8.jpg', keywords: ['happy'] },
-             { id: 1, url: './memes/9.jpg', keywords: ['happy'] },
-             { id: 2, url: './memes/1.jpg', keywords: ['happy'] },
-             { id: 1, url: './memes/5.jpg', keywords: ['happy'] },
-             { id: 2, url: './memes/10.jpg', keywords: ['happy'] },
-             { id: 1, url: './memes/5.jpg', keywords: ['happy'] },
-             { id: 2, url: './memes/10.jpg', keywords: ['happy'] },
-             { id: 1, url: './memes/5.jpg', keywords: ['happy'] },
-             { id: 2, url: './memes/10.jpg', keywords: ['happy'] },
+var gImgs = [{ id: 1, url: '../memes/1.jpg', keywords: ['happy'] },
+{ id: 2, url: '../memes/2.jpg', keywords: ['happy'] },
+{ id: 3, url: '../memes/3.jpg', keywords: ['happy'] },
+{ id: 4, url: '../memes/4.jpg', keywords: ['happy'] },
+{ id: 5, url: '../memes/5.jpg', keywords: ['happy'] },
+{ id: 6, url: '../memes/6.jpg', keywords: ['happy'] },
+{ id: 7, url: '../memes/7.jpg', keywords: ['happy'] },
+{ id: 8, url: '../memes/8.jpg', keywords: ['happy'] },
+{ id: 9, url: '../memes/9.jpg', keywords: ['happy'] },
+{ id: 10, url: '../memes/10.jpg', keywords: ['happy'] },
+{ id: 11, url: '../memes/11.jpg', keywords: ['happy'] },
+{ id: 12, url: '../memes/12.jpg', keywords: ['happy'] },
+{ id: 13, url: '../memes/13.jpg', keywords: ['happy'] },
+{ id: 14, url: '../memes/14.jpg', keywords: ['happy'] },
+{ id: 15, url: '../memes/15.jpg', keywords: ['happy'] },
+{ id: 16, url: '../memes/16.jpg', keywords: ['happy'] },
+{ id: 17, url: '../memes/16.jpg', keywords: ['happy'] },
+{ id: 18, url: '../memes/16.jpg', keywords: ['happy'] },
 ];
 var gMeme = {
-    selectedImgId: 5,
+    selectedImgId: 0,
     selectedLineIdx: 0,
     lines: [{
         id: 0,
@@ -49,8 +51,8 @@ var gSettings = {
     opacity: 100,
 }
 function init() {
-    // gElCanvas = document.getElementById('my-canvas')
-    // gCtx = gElCanvas.getContext('2d')
+    gElCanvas = document.getElementById('my-canvas')
+    gCtx = gElCanvas.getContext('2d')
     // drawMeme()
     rednerPictures()
 }
@@ -118,7 +120,6 @@ function onChangeTextFocus() {
 }
 
 function focusByClick(ev) {
-    console.log('clicked')
     const { offsetX: x, offsetY: y } = ev
     console.log(x, y)
     var clickedIdx = gMeme.lines.findIndex(line => {
@@ -128,9 +129,15 @@ function focusByClick(ev) {
     })
     if (clickedIdx !== -1) {
         gMeme.selectedLineIdx = clickedIdx
+        document.getElementById('user-txt').value = setInputBoxValue(clickedIdx)
         drawMeme()
+        document.getElementById('user-txt').focus()
     }
 
+}
+function setInputBoxValue(lineIdx) {
+    var line = gMeme.lines.find(line => line.id === lineIdx)
+    return line.txt
 }
 
 function focusOnText(focusedLine) {

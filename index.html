@@ -9,6 +9,7 @@
 </head>
 
 <body onload="init()">
+    <div class="screen" onclick="toggleModal()"></div>
     <header>
         <div class="header-container container flex space-between">
             <div class="logo">Logo</div>
@@ -21,12 +22,12 @@
     </header>
      <!-- MODAL -->
      <div class="modal flex space-between">
-        <div class="meme-container flex col space-between">
+        <div class="meme-container flex col space-between ">
             <canvas id="my-canvas" width="500" height="500" style="border:1px solid black;" 
             onmousedown="focusByClick(event)"></canvas>
             <button>Reset Meme</button>
         </div>
-        <div class="meme-settings flex col space-between align-items">
+        <div class="meme-settings flex col space-around align-items">
             <input type="text" id="user-txt" oninput="onEditNewTxt(this)"> 
             <button onclick="onChangeFontSize(10)">Font Size Up</button>
             <button onclick="onChangeFontSize(-10)">Font Size Down</button>
