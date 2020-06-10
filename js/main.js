@@ -127,6 +127,7 @@ function focusByClick(ev) {
     if (clickedIdx !== -1) {
         gMeme.selectedLineIdx = clickedIdx
         document.getElementById('user-txt').value = setInputBoxValue(clickedIdx);
+        document.getElementById('user-txt').select();
         document.getElementById('user-txt').focus();
         drawMeme()
     }
@@ -170,7 +171,14 @@ function changeTextAlign(align) {
     drawMeme()
 }
 
-function removeLine() {
+function removeLine() {             //!fix bug when removing ! 
     gMeme.lines.splice(gMeme.selectedLineIdx, 1)
+    gMeme.selectedLineIdx = 0;
+    drawMeme()
+}
+
+function changeTextColor(color) {
+    var line = getLine(gMeme.selectedLineIdx)
+    line.color = color;
     drawMeme()
 }

@@ -127,7 +127,6 @@ header {
     left: 50%;
     background-color: brown;
     transform: translate(-50%, -175%);
-    background-color: white;
     border: 3px solid black;
     visibility: hidden;
     opacity: 0;
@@ -164,7 +163,7 @@ header {
 }
 
 .meme-container .btn-reset {
-    background-color: rgb(115, 131, 167);
+    background-color: lightgray;
     font-family: piedra, sans-serif;
     padding: 10px;
     font-size: 1.4rem;
@@ -222,6 +221,17 @@ header {
     top: 27px;
     right: 497px;
 }
+
+/* STICKERS-CONTAINER */
+.stickers-container{
+    height: 200px;
+    width: 500px;
+    border:3px solid black;
+    margin:10px auto;
+    border-radius: 20px;
+}
+
+
 
 /* ABOUT */
 
