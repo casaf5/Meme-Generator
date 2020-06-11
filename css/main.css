@@ -238,7 +238,7 @@ header {
     border-radius: 20px;
 }
 
-#user-font{
+#user-font {
     width: 50%;
     align-self: center;
     height: 25px;
@@ -359,5 +359,15 @@ a {
     }
     .modal.open {
         transform: translate(-50%, -30%);
+    }
+    .meme-settings>.fas {
+        position: absolute;
+        top: 642px;
+        right: 394px;
+    }
+    .meme-settings input~.fas {
+        position: absolute;
+        top: 640px;
+        right: 9px;
     }
 }
