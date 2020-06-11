@@ -20,10 +20,22 @@ function renderSearchedWords() {
     }
 }
 
+function renderStickers() {
+    var elSContainer = document.querySelector('.stickers-container')
+    const stickersCount = 20; //change if adding more stickers
+    var strHtml = ''
+    for (var i = 1; i <= stickersCount; i++) {
+        strHtml += `<img onclick="onAddSticker(this)" src="images/stickers/${i}.png"/>`
+    }
+    elSContainer.innerHTML = strHtml
+}
 function toggleModal(elImg) {
     document.querySelector('.modal').classList.toggle('open')
     document.querySelector('.screen').classList.toggle('on')
-    if (document.querySelector('.modal').classList.contains('open')) setCanvasMeme(elImg)
+    if (document.querySelector('.modal').classList.contains('open')) {
+        setCanvasMeme(elImg)
+        renderStickers()
+    }
 }
 
 function onDownloadCanvas(elLink) {
@@ -91,5 +103,9 @@ function setLinePosition(ev) {
     currLine.posX = ev.offsetX
     currLine.posY = ev.offsetY
     drawMeme()
+}
+
+function onAddSticker(elImg) {
+    gCtx.drawImage(elImg, gElCanvas.width / 2, gElCanvas.height / 2, 60, 60)
 }
 

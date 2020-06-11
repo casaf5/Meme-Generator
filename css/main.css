@@ -84,6 +84,7 @@ header {
     border: 3px solid black;
     padding: 5px;
     height: 100%;
+    overflow: hidden;
 }
 
 .search-words>* {
@@ -131,8 +132,7 @@ header {
 
 .modal {
     position: absolute;
-    /* width: 70%;
-    height: 80%; */
+    width: 70%;
     top: 50%;
     left: 50%;
     background-color: brown;
@@ -236,10 +236,22 @@ header {
 
 .stickers-container {
     height: 200px;
-    width: 445px;
+    width: 95%;
     border: 3px solid black;
     margin: 10px auto;
+    padding:10px;
     border-radius: 20px;
+    display:grid;
+    grid-template-columns: repeat(5,1fr);
+    grid-auto-rows: 1fr;
+    justify-items: center;
+    overflow: scroll;
+    
+}
+.stickers-container img{
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
 }
 
 #user-font {
