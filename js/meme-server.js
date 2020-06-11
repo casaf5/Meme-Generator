@@ -226,6 +226,7 @@ function saveMeme(meme) {
     gSavedMemes = !loadFromStorage('gSavedMemes') ? [] : loadFromStorage('gSavedMemes')
     gSavedMemes.push(meme)
     saveToStorage('gSavedMemes', gSavedMemes)
+    toggleModal()
 }
 function resetMeme() {
     var currMemeIdx = gMeme.selectedImgId

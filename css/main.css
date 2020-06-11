@@ -41,6 +41,10 @@ header {
     height: 70px;
     padding: 10px;
     border-inline-start: 2px solid black;
+    transition: transform .3s;
+}
+.main-nav li:hover{
+    transform: scale(1.05);
 }
 
 .main-nav li .fas {
@@ -77,7 +81,7 @@ header {
 .search-words {
     flex-basis: 70%;
     letter-spacing: 1px;
-    border: 2px solid black;
+    border: 3px solid black;
     padding: 5px;
     height: 100%;
 }
