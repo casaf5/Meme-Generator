@@ -4,25 +4,25 @@ var gElCanvas
 var gCtx
 var gIsClicked = false;
 var gLastPoint = { x: 0, y: 0 }
-var gKeywords = { 'happy': 12, 'funny puk': 1 }
-var gImgs = [{ id: 1, url: '/memes/1.jpg', keywords: ['happy'] },
-{ id: 2, url: '/memes/2.jpg', keywords: ['happy'] },
-{ id: 3, url: '/memes/3.jpg', keywords: ['happy'] },
-{ id: 4, url: '/memes/4.jpg', keywords: ['happy'] },
-{ id: 5, url: '/memes/5.jpg', keywords: ['happy'] },
-{ id: 6, url: '/memes/6.jpg', keywords: ['happy'] },
-{ id: 7, url: '/memes/7.jpg', keywords: ['happy'] },
-{ id: 8, url: '/memes/8.jpg', keywords: ['happy'] },
-{ id: 9, url: '/memes/9.jpg', keywords: ['happy'] },
-{ id: 10, url: '/memes/10.jpg', keywords: ['happy'] },
-{ id: 11, url: '/memes/11.jpg', keywords: ['happy'] },
-{ id: 12, url: '/memes/12.jpg', keywords: ['happy'] },
-{ id: 13, url: '/memes/13.jpg', keywords: ['happy'] },
-{ id: 14, url: '/memes/14.jpg', keywords: ['happy'] },
-{ id: 15, url: '/memes/15.jpg', keywords: ['happy'] },
-{ id: 16, url: '/memes/16.jpg', keywords: ['happy'] },
-{ id: 17, url: '/memes/16.jpg', keywords: ['happy'] },
-{ id: 18, url: '/memes/16.jpg', keywords: ['happy'] },
+var gKeywords = {'happy': 12 }
+var gImgs = [{ id: 1, url: 'memes/1.jpg', keywords: ['tooth', 'trump', 'donald'] },
+{ id: 2, url: 'memes/2.jpg', keywords: ['dogs', 'lick'] },
+{ id: 3, url: 'memes/3.jpg', keywords: ['baby', 'sleep', 'dog'] },
+{ id: 4, url: 'memes/4.jpg', keywords: ['cat', 'keyboard', 'sleep'] },
+{ id: 5, url: 'memes/5.jpg', keywords: ['win', 'badass', 'baby', 'beach'] },
+{ id: 6, url: 'memes/6.jpg', keywords: ['size', 'professor', 'man', 'hands'] },
+{ id: 7, url: 'memes/7.jpg', keywords: ['shock', 'baby', 'little'] },
+{ id: 8, url: 'memes/8.jpg', keywords: ['hat', 'purpple', 'man'] },
+{ id: 9, url: 'memes/9.jpg', keywords: ['baby', 'happy', 'little'] },
+{ id: 10, url: 'memes/10.jpg', keywords: ['happy', 'laugh', 'barak', 'obama'] },
+{ id: 11, url: 'memes/11.jpg', keywords: ['kiss'] },
+{ id: 12, url: 'memes/12.jpg', keywords: ['finger', 'glasses', 'israel', 'hands'] },
+{ id: 13, url: 'memes/13.jpg', keywords: ['cheers', 'leonardo dicaprio', 'wine', 'glass', 'hand'] },
+{ id: 14, url: 'memes/14.jpg', keywords: ['matrix', 'glasses'] },
+{ id: 15, url: 'memes/15.jpg', keywords: ['game of thrones', 'hair', 'hands'] },
+{ id: 16, url: 'memes/16.jpg', keywords: ['movie', 'startrek', 'red shirt', 'hands'] },
+{ id: 17, url: 'memes/16.jpg', keywords: ['vladimir putin', 'russia', 'suit', 'hands'] },
+{ id: 18, url: 'memes/16.jpg', keywords: ['toystory', 'bazz', 'woody', 'movie', 'cartoon'] },
 ];
 var gMeme = {
     selectedImgId: 0,
@@ -181,4 +181,16 @@ function changeTextColor(color) {
     var line = getLine(gMeme.selectedLineIdx)
     line.color = color;
     drawMeme()
+}
+
+function filterImages(searchTxt) {
+    var images = gImgs.reduce((acc, image) => {
+        if (image.keywords.join('').includes(searchTxt)) acc.push(image)
+        return acc
+    }, [])
+    return images
+}
+
+function getImages() {
+    return gImgs;
 }

@@ -12,7 +12,7 @@
     <div class="screen" onclick="toggleModal()"></div>
     <header>
         <div class="header-container container flex space-between">
-            <div class="logo"><img src="/images/LOGO.png"></div>
+            <div class="logo"><img src="images/LOGO.png"></div>
             <ul class="main-nav clean-list flex space-between">
                 <li>
                     <a href="/index.html"> <i class="fas fa-palette fa-2x"></i>Gallary</a>
@@ -88,7 +88,8 @@
     <main>
         <div class="search container flex space-between">
             <div class="search-bar flex center">
-                <input type="text" id="search-box" placeholder="Search Your Meme"><i class="fas fa-search fa-2x"></i>
+                <input type="text" id="search-box" placeholder="Search Your Meme" >
+                <i class="fas fa-search fa-2x" onclick="onFilterImages()"></i>
             </div>
             <div class="search-words flex center">
                 happy,hat,boy,women....
@@ -105,7 +106,7 @@
     </footer>
 
     <script src="https://kit.fontawesome.com/f334b000b4.js" crossorigin="anonymous"></script>
-    <script src="js/main.js"></script>
+    <script src="js/meme-server.js"></script>
     <script src="js/meme-controller.js"></script>
 </body>
 
