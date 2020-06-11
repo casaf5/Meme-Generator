@@ -64,3 +64,9 @@ function onFilterImages(searchTxt) {
     renderSearchedWords()
 }
 
+function onSetOpacity(value){
+    document.getElementById('label-opacity').innerText=`Text Opacity : ${value}`
+    changeTextOpcity(value)
+}
+
+

@@ -1,10 +1,13 @@
 'use strict';
+(() => {
+    saveToStorage('meme-default', gMeme)
+})
 
 var gElCanvas
 var gCtx
 var gIsClicked = false;
 var gLastPoint = { x: 0, y: 0 }
-var gKeywords = { 'happy': 12, 'man':20,'dog':5,'kiss':1,'hat':9,'baby':20,'glasses':20,'movie':30 }
+var gKeywords = { 'happy': 12, 'man': 20, 'dog': 5, 'kiss': 1, 'hat': 9, 'baby': 20, 'glasses': 20, 'movie': 30 }
 var gImgs = [{ id: 1, url: 'memes/1.jpg', keywords: ['tooth', 'trump', 'donald'] },
 { id: 2, url: 'memes/2.jpg', keywords: ['dogs', 'lick'] },
 { id: 3, url: 'memes/3.jpg', keywords: ['baby', 'sleep', 'dog'] },
@@ -33,6 +36,7 @@ var gMeme = {
         txt: 'Top Text Line',
         size: 90, align: 'center',
         color: 'white',
+        opacity: '100',
         posX: 250,
         posY: 50
     },
@@ -41,6 +45,7 @@ var gMeme = {
         txt: 'Bottom Text Line',
         size: 40, align: 'center',
         color: 'white',
+        opacity: '100',
         posX: 250,
         posY: 450
     }]
@@ -59,7 +64,7 @@ function init() {
 }
 
 function onEditNewTxt(elTxt) {
-    var focusedLine = getLine(gMeme.selectedLineIdx)
+    var focusedLine = getCurrLine()
     focusedLine.txt = elTxt.value
     gCtx.font = `${focusedLine.size}px memeimpact`
     gCtx.align = `${focusedLine.align}`
@@ -96,18 +101,21 @@ function setImage(imgId) {
 
 function drawMeme() {
     setImage(gMeme.selectedImgId)
+    var currLine = getCurrLine()
+    focusOnText(currLine)
     gMeme.lines.forEach(line => {
         gCtx.font = `${line.size}px memeimpact`
         gCtx.fillStyle = line.color
         gCtx.textAlign = line.align
         gCtx.textBaseline = "top"
+        gCtx.globalAlpha = line.opacity / 100
         gCtx.fillText(line.txt, line.posX, line.posY)
     })
-    focusOnText(getLine(gMeme.selectedLineIdx))
+
 }
 
 function onChangeFontSize(diff) {
-    var focusedLine = getLine(gMeme.selectedLineIdx)
+    var focusedLine = getCurrLine()
     focusedLine.size += diff
     drawMeme()
 }
@@ -142,18 +150,30 @@ function setInputBoxValue(lineIdx) {
 
 function focusOnText(focusedLine) { //!fix align bux 
     var currWidth = getWidth(focusedLine)
+    const [x, y] = getTextCoords(focusedLine, currWidth)
     gCtx.beginPath()
     gCtx.strokeStyle = 'white'
-    gCtx.rect(focusedLine.posX - currWidth / 2, focusedLine.posY, currWidth, focusedLine.size)
+    gCtx.rect(x, y, currWidth, focusedLine.size)
     gCtx.stroke()
 }
 
-function getLine(lineId) {
-    return gMeme.lines.find(line => line.id === lineId)
+function getCurrLine() {
+    return gMeme.lines[gMeme.selectedLineIdx]
+}
+
+function getTextCoords(line, width) {
+    switch (line.align) {
+        case 'left':
+            return [line.posX, line.posY]
+        case 'right':
+            return [line.posX - width, line.posY]
+        case 'center':
+            return [line.posX - width / 2, line.posY]
+    }
 }
 
 function onChangeLineLocation(diff, posToChange) {
-    var focusedLine = getLine(gMeme.selectedLineIdx)
+    var focusedLine = getCurrLine(gMeme.selectedLineIdx)
     if (posToChange === 'x')
         focusedLine.posX += diff
     else {
@@ -168,7 +188,7 @@ function getWidth(line) {
 }
 
 function changeTextAlign(align) {
-    var line = getLine(gMeme.selectedLineIdx)
+    var line = getCurrLine()
     line.align = align;
     drawMeme()
 }
@@ -180,7 +200,7 @@ function removeLine() {             //!fix bug when removing !
 }
 
 function changeTextColor(color) {
-    var line = getLine(gMeme.selectedLineIdx)
+    var line = getCurrLine()
     line.color = color;
     drawMeme()
 }
@@ -208,6 +228,19 @@ function saveMeme(meme) {
     saveToStorage('gSavedMemes', gSavedMemes)
 }
 
-function getKeyWords(){
+function getKeyWords() {
     return gKeywords;
+}
+
+function changeTextOpcity(value) {
+    var line = getCurrLine()
+    line.opacity = value
+    drawMeme()
+}
+
+function resetMeme() {
+    var currMemeIdx = gMeme.selectedImgId
+    gMeme = loadFromStorage('meme-default')
+    gMeme.selectedImgId = currMemeIdx
+    drawMeme()
 }

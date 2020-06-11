@@ -31,7 +31,7 @@
         <div class="meme-container flex col space-between ">
             <canvas id="my-canvas" width="500" height="500" style="border:1px solid black;"
                 onmousedown="focusByClick(event)"></canvas>
-            <button class="btn-reset">Reset Meme</button>
+            <button class="btn-reset" onclick="resetMeme()">Reset Meme</button>
             <div class="meme-actions flex space-between">
                 <button class="btn-action">Share</button>
                 <button class="btn-action" onclick="onSaveMeme()">Save</button>
@@ -68,8 +68,8 @@
                 <div class="flex space-around">
                     <label for="text-color">Text Color:</label>
                     <input type="color" id="text-color" onchange="changeTextColor(this.value)">
-                    <label for="text-bg-color">Text BG Color:</label>
-                    <input type="color" id="text-bg-color">
+                    <label for="text-bg-color" id="label-opacity">Text-Opacity :100</label>
+                    <input type="range" id="text-opacity" min="0" max="100" value="100" onchange="onSetOpacity(this.value)">
                 </div>
             </div>
 
