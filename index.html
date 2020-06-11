@@ -44,7 +44,7 @@
             <i class="fas fa-trash-alt fa-2x" onclick="removeLine()"></i>
             <div class="text-location flex col">
                 <h5 class="section-head">Text Location Control:</h5>
-                <div class="flex space-between">
+                <div class="flex space-around">
                     <button onclick="onChangeLineLocation(-50,'y')"><i class="fas fa-arrow-up fa-3x"></i></button>
                     <button onclick="onChangeLineLocation(50,'y')"><i class="fas fa-arrow-down fa-3x"></i></button>
                     <button onclick="onChangeLineLocation(50,'x')"><i class="fas fa-arrow-right fa-3x"></i></button>
@@ -53,23 +53,30 @@
             </div>
             <div class="text-decoration flex col ">
                 <h5 class="section-head">Text Size And Alignment</h5>
-                <div class="flex space-between">
-                    <button onclick="changeTextAlign('right')"><i class="fas fa-align-right fa-3x"></i></button>
-                    <button onclick="changeTextAlign('center')"><i class="fas fa-align-justify fa-3x"></i></button>
+                <div class="flex space-around">
                     <button onclick="changeTextAlign('left')"><i class="fas fa-align-left fa-3x"></i></button>
+                    <button onclick="changeTextAlign('center')"><i class="fas fa-align-justify fa-3x"></i></button>
+                    <button onclick="changeTextAlign('right')"><i class="fas fa-align-right fa-3x"></i></button>
                     <button onclick="onChangeFontSize(10)"><i class="fas fa-plus fa-3x"></i></button>
                     <button onclick="onChangeFontSize(-10)"><i class="fas fa-minus fa-3x"></i></button>
                     <!-- <button onclick="onChangeTextFocus()">switch focus</button> -->
                 </div>
+                <select id="user-font" onchange="changeTextFont(this.value)" value="Impact">
+                    <option value="memeimpact">Impact</option>
+                    <option value="arial">Arial</option>
+                    <option value="movoscape">Monoscape</option>
+                    <option value="courier-New">Courier-New</option>
+                </select>
             </div>
             <!-- ADD FULL SUPPORT FOR COLORS -->
             <div class="colors flex col ">
-                <h5 class="section-head">Color Adjustment :</h5>        
+                <h5 class="section-head">Color Adjustment :</h5>
                 <div class="flex space-around">
                     <label for="text-color">Text Color:</label>
                     <input type="color" id="text-color" onchange="changeTextColor(this.value)">
                     <label for="text-bg-color" id="label-opacity">Text-Opacity :100</label>
-                    <input type="range" id="text-opacity" min="0" max="100" value="100" onchange="onSetOpacity(this.value)">
+                    <input type="range" id="text-opacity" min="0" max="100" value="100"
+                        onchange="onSetOpacity(this.value)">
                 </div>
             </div>
 
@@ -78,7 +85,7 @@
                 <div class="stickers-container">
 
                     stickers
-                  
+
                 </div>
             </div>
 
@@ -88,7 +95,7 @@
     <main>
         <div class="search container flex space-between">
             <div class="search-bar flex center">
-                <input type="text" id="search-box" placeholder="Search Your Meme" >
+                <input type="text" id="search-box" placeholder="Search Your Meme">
                 <i class="fas fa-search fa-2x" onclick="onFilterImages()"></i>
             </div>
             <div class="search-words flex wrap">

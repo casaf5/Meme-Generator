@@ -35,7 +35,8 @@ var gMeme = {
         id: 0,
         txt: 'Top Text Line',
         size: 90, align: 'center',
-        color: 'white',
+        color: 'black',
+        font: 'memeimpact',
         opacity: '100',
         posX: 250,
         posY: 50
@@ -44,7 +45,8 @@ var gMeme = {
         id: 1,
         txt: 'Bottom Text Line',
         size: 40, align: 'center',
-        color: 'white',
+        color: 'black',
+        font: 'memeimpact',
         opacity: '100',
         posX: 250,
         posY: 450
@@ -84,7 +86,9 @@ function addNewTxt() {
         id: gMeme.lines.length,
         txt: 'Enter New Text',
         size: 30, align: 'center',
-        color: 'white',
+        color: 'black',
+        font:'memeimpact',
+        opacity:100,
         posX: gElCanvas.width / 2,
         posY: gElCanvas.height / 2,
     })
@@ -108,7 +112,7 @@ function drawMeme() {
     var currLine = getCurrLine()
     focusOnText(currLine)
     gMeme.lines.forEach(line => {
-        gCtx.font = `${line.size}px memeimpact`
+        gCtx.font = `${line.size}px ${line.font}`
         gCtx.fillStyle = line.color
         gCtx.textAlign = line.align
         gCtx.textBaseline = "top"
@@ -247,4 +251,11 @@ function resetMeme() {
     gMeme = loadFromStorage('meme-default')
     gMeme.selectedImgId = currMemeIdx
     drawMeme()
+}
+
+function changeTextFont(value) {
+    var line = getCurrLine()
+    line.font = `${value}`;
+    drawMeme()
+
 }

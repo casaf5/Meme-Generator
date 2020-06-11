@@ -102,7 +102,7 @@ header {
     margin: 10px auto;
     border: 3px solid black;
     display: grid;
-    grid-template-columns: repeat(4, minmax(100px,200px));
+    grid-template-columns: repeat(4, minmax(100px, 200px));
     grid-auto-rows: 200px;
     grid-auto-flow: dense;
     grid-auto-columns: 200px;
@@ -319,7 +319,7 @@ a {
 
 @media (max-width:480px) {
     .container {
-        max-width: 480;
+        max-width: 480px;
     }
     .header-container {
         flex-direction: column;
@@ -332,7 +332,7 @@ a {
         height: 100%;
     }
     .search-box {
-       flex-basis: 100%;
+        flex-basis: 100%;
     }
     .image-container {
         grid-template-columns: repeat(2, 200px);
@@ -343,17 +343,14 @@ a {
     .search {
         flex-direction: column;
     }
-    
     .search-bar, .search-words {
         width: 100%;
     }
-
-    .modal{
+    .modal {
         flex-direction: column;
+        max-width: 448px;
+    }
+    .modal.open {
+        transform: translate(-50%, -30%);
     }
 }
-
-
-
-
-
