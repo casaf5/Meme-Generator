@@ -87,7 +87,8 @@ function onStartDrag(downEv) {
 }
 function setLinePosition(ev) {
     var currLine = getCurrLine()
-    currLine.posX = ev.offsetX 
+    // var diffX = ev.offsetX - currLine.x
+    currLine.posX = ev.offsetX
     currLine.posY = ev.offsetY
     drawMeme()
 }

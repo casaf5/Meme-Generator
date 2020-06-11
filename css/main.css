@@ -79,6 +79,7 @@ header {
     letter-spacing: 1px;
     border: 2px solid black;
     padding: 5px;
+    height: 100%;
 }
 
 .search-words>* {
@@ -126,8 +127,8 @@ header {
 
 .modal {
     position: absolute;
-    width: 70%;
-    height: 80%;
+    /* width: 70%;
+    height: 80%; */
     top: 50%;
     left: 50%;
     background-color: brown;
@@ -218,20 +219,20 @@ header {
 .meme-settings input~.fas {
     position: absolute;
     top: 25px;
-    right: 15px
+    right: 9px
 }
 
 .meme-settings>.fas {
     position: absolute;
     top: 27px;
-    right: 497px;
+    right: 412px;
 }
 
 /* STICKERS-CONTAINER */
 
 .stickers-container {
     height: 200px;
-    width: 500px;
+    width: 445px;
     border: 3px solid black;
     margin: 10px auto;
     border-radius: 20px;
@@ -345,6 +346,10 @@ a {
     
     .search-bar, .search-words {
         width: 100%;
+    }
+
+    .modal{
+        flex-direction: column;
     }
 }
 
