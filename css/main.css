@@ -322,6 +322,7 @@ a {
     opacity: 1;
 }
 
+
 /* SCREEN-OPTIMIZATION */
 
 @media (max-width:480px) {
@@ -352,6 +353,9 @@ a {
     }
     .search-bar, .search-words {
         width: 100%;
+    }
+    .search-words{
+        height:58px;
     }
     .modal {
         flex-direction: column;

@@ -38,7 +38,7 @@ function renderSavedMemes() {
     document.querySelector('.search-bar').style.display = 'none'
     document.querySelector('.search-words').style.display = 'none'
     if (!images) {
-        elImgCon.innerHTML = `<h1 style="grid-column:1/4;">Save Here Your Best And Favorite Memes !</h1>`
+        elImgCon.innerHTML = `<h1 style="grid-column:1/5;">Save Here Your Best And Favorite Memes !</h1>`
         return
     }
     var strHTML = ''

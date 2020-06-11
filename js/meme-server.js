@@ -24,8 +24,10 @@ var gImgs = [{ id: 1, url: "../memes/1.jpg", keywords: ['tooth', 'trump', 'donal
 { id: 14, url: "./memes/14.jpg", keywords: ['matrix', 'glasses'] },
 { id: 15, url: "./memes/15.jpg", keywords: ['game of thrones', 'hair', 'hands'] },
 { id: 16, url: "./memes/16.jpg", keywords: ['movie', 'startrek', 'red shirt', 'hands'] },
-{ id: 17, url: "./memes/16.jpg", keywords: ['vladimir putin', 'russia', 'suit', 'hands'] },
-{ id: 18, url: "./memes/16.jpg", keywords: ['toystory', 'bazz', 'woody', 'movie', 'cartoon'] },
+{ id: 17, url: "./memes/17.jpg", keywords: ['vladimir putin', 'russia', 'suit', 'hands'] },
+{ id: 18, url: "./memes/18.jpg", keywords: ['toystory', 'bazz', 'woody', 'movie', 'cartoon'] },
+{ id: 19, url: "./memes/19.jpg", keywords: ['lady','nature'] },
+{ id: 20, url: "./memes/20.jpg", keywords: ['dance', 'boy', 'baby'] },
 ];
 var gSavedMemes = []
 var gMeme = {
@@ -50,15 +52,15 @@ var gMeme = {
         font: 'memeimpact',
         opacity: '100',
         posX: 250,
-        posY: 450
+        posY: 350
     }]
 }
-
 var gSettings = {
     color: 'black',
     shape: 'line',
     opacity: 100,
 }
+
 function init() {
     gElCanvas = document.getElementById('my-canvas')
     gCtx = gElCanvas.getContext('2d')
@@ -67,6 +69,20 @@ function init() {
     renderSearchedWords()
 }
 
+function drawMeme() {
+    setImage(gMeme.selectedImgId)
+    var currLine = getCurrLine()
+    focusOnText(currLine)
+    gMeme.lines.forEach(line => {
+        gCtx.font = `${line.size}px ${line.font}`
+        gCtx.fillStyle = line.color
+        gCtx.textAlign = line.align
+        gCtx.textBaseline = "top"
+        gCtx.globalAlpha = line.opacity / 100
+        gCtx.fillText(line.txt, line.posX, line.posY)
+    })
+
+}
 
 function onEditNewTxt(elTxt) {
     var focusedLine = getCurrLine()
@@ -80,6 +96,7 @@ function onEditNewTxt(elTxt) {
     focusOnText(focusedLine)
 
 }
+
 function addNewTxt() {
     gMeme.lines.push({
         id: ++gMeme.linesCount,
@@ -103,33 +120,49 @@ function setImage(imgId) {
     var img = gImgs.find(img => img.id === imgId)
     var elImg = new Image();
     elImg.src = img.url;
-    gCtx.drawImage(elImg, 0, 0, 500, 500);     //!Add correct aspect ratio
+    gElCanvas.height = (elImg.height * gElCanvas.width) / elImg.width
+    gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height);     //!Add correct aspect ratio
 }
 
-function drawMeme() {
-    setImage(gMeme.selectedImgId)
-    var currLine = getCurrLine()
-    focusOnText(currLine)
-    gMeme.lines.forEach(line => {
-        gCtx.font = `${line.size}px ${line.font}`
-        gCtx.fillStyle = line.color
-        gCtx.textAlign = line.align
-        gCtx.textBaseline = "top"
-        gCtx.globalAlpha = line.opacity / 100
-        gCtx.fillText(line.txt, line.posX, line.posY)
-    })
-
-}
 
 function onChangeFontSize(diff) {
     var focusedLine = getCurrLine()
     focusedLine.size += diff
     drawMeme()
 }
+function onChangeLineLocation(diff, posToChange) {
+    var focusedLine = getCurrLine()
+    if (posToChange === 'x')
+        focusedLine.posX += diff
+    else {
+        focusedLine.posY += diff
+    }
+    drawMeme()
+}
 
 function onChangeTextFocus() {
     gMeme.selectedLineIdx++
     if (gMeme.selectedLineIdx >= gMeme.lines.length) gMeme.selectedLineIdx = 0
+    drawMeme()
+}
+function changeTextAlign(align) {
+    var line = getCurrLine()
+    line.align = align;
+    drawMeme()
+}
+function changeTextColor(color) {
+    var line = getCurrLine()
+    line.color = color;
+    drawMeme()
+}
+function changeTextFont(value) {
+    var line = getCurrLine()
+    line.font = `${value}`;
+    drawMeme()
+}
+function changeTextOpcity(value) {
+    var line = getCurrLine()
+    line.opacity = value
     drawMeme()
 }
 
@@ -150,11 +183,6 @@ function focusByClick(ev) {
     }
 
 }
-function setInputBoxValue(lineIdx) {
-    var line = gMeme.lines.find(line => line.id === lineIdx)
-    return line.txt
-}
-
 function focusOnText(focusedLine) {
     var currWidth = getWidth(focusedLine)
     const [x, y] = getTextCoords(focusedLine, currWidth)
@@ -163,7 +191,19 @@ function focusOnText(focusedLine) {
     gCtx.rect(x, y, currWidth, focusedLine.size)
     gCtx.stroke()
 }
+function getWidth(line) {
+    gCtx.font = `${line.size}px memeimpact`
+    return gCtx.measureText(line.txt).width
+}
 
+function getImages() {
+    return gImgs;
+}
+
+function getSavedMemes() {
+    var memes = loadFromStorage('gSavedMemes')
+    return memes
+}
 function getCurrLine() {
     return gMeme.lines[gMeme.selectedLineIdx]
 }
@@ -178,55 +218,8 @@ function getTextCoords(line, width) {
             return [line.posX - width / 2, line.posY]
     }
 }
-
-function onChangeLineLocation(diff, posToChange) {
-    var focusedLine = getCurrLine()
-    if (posToChange === 'x')
-        focusedLine.posX += diff
-    else {
-        focusedLine.posY += diff
-    }
-    drawMeme()
-}
-
-function getWidth(line) {
-    gCtx.font = `${line.size}px memeimpact`
-    return gCtx.measureText(line.txt).width
-}
-
-function changeTextAlign(align) {
-    var line = getCurrLine()
-    line.align = align;
-    drawMeme()
-}
-
-function removeLine() {             //!fix bug when removing ! 
-    gMeme.lines.splice(gMeme.selectedLineIdx, 1)
-    gMeme.selectedLineIdx = 0;
-    drawMeme()
-}
-
-function changeTextColor(color) {
-    var line = getCurrLine()
-    line.color = color;
-    drawMeme()
-}
-
-function filterImages(searchTxt) {              //!ADD SUPPORTS for more then 1 word 
-    var images = gImgs.reduce((acc, image) => {
-        if (image.keywords.join('').includes(searchTxt)) acc.push(image)
-        return acc
-    }, [])
-    return images
-}
-
-function getImages() {
-    return gImgs;
-}
-
-function getSavedMemes() {
-    var memes = loadFromStorage('gSavedMemes')
-    return memes
+function getKeyWords() {
+    return gKeywords;
 }
 
 function saveMeme(meme) {
@@ -234,27 +227,26 @@ function saveMeme(meme) {
     gSavedMemes.push(meme)
     saveToStorage('gSavedMemes', gSavedMemes)
 }
-
-function getKeyWords() {
-    return gKeywords;
-}
-
-function changeTextOpcity(value) {
-    var line = getCurrLine()
-    line.opacity = value
-    drawMeme()
-}
-
 function resetMeme() {
     var currMemeIdx = gMeme.selectedImgId
     gMeme = loadFromStorage('meme-default')
     gMeme.selectedImgId = currMemeIdx
     drawMeme()
 }
-
-function changeTextFont(value) {
-    var line = getCurrLine()
-    line.font = `${value}`;
-    drawMeme()
-
+function filterImages(searchTxt) {              //!ADD SUPPORTS for more then 1 word 
+    var images = gImgs.reduce((acc, image) => {
+        if (image.keywords.join('').includes(searchTxt)) acc.push(image)
+        return acc
+    }, [])
+    return images
 }
+function removeLine() {             //!fix bug when removing ! 
+    gMeme.lines.splice(gMeme.selectedLineIdx, 1)
+    gMeme.selectedLineIdx = 0;
+    drawMeme()
+}
+function setInputBoxValue(lineIdx) {
+    var line = gMeme.lines.find(line => line.id === lineIdx)
+    return line.txt
+}
+
