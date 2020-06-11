@@ -5,7 +5,7 @@
 
 var gElCanvas
 var gCtx
-var gIsClicked = false;
+var gIsDragging = false;
 var gLastPoint = { x: 0, y: 0 }
 var gKeywords = { 'happy': 12, 'man': 20, 'dog': 5, 'kiss': 1, 'hat': 9, 'baby': 20, 'glasses': 20, 'movie': 30 }
 var gImgs = [{ id: 1, url: 'memes/1.jpg', keywords: ['tooth', 'trump', 'donald'] },
@@ -59,9 +59,13 @@ var gSettings = {
 function init() {
     gElCanvas = document.getElementById('my-canvas')
     gCtx = gElCanvas.getContext('2d')
+    startEventListeners()
     rednerPictures()
     renderSearchedWords()
 }
+
+
+
 
 function onEditNewTxt(elTxt) {
     var focusedLine = getCurrLine()
@@ -148,7 +152,7 @@ function setInputBoxValue(lineIdx) {
     return line.txt
 }
 
-function focusOnText(focusedLine) { //!fix align bux 
+function focusOnText(focusedLine) {
     var currWidth = getWidth(focusedLine)
     const [x, y] = getTextCoords(focusedLine, currWidth)
     gCtx.beginPath()

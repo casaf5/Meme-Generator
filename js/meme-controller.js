@@ -69,4 +69,14 @@ function onSetOpacity(value){
     changeTextOpcity(value)
 }
 
+function startEventListeners(){
+    gElCanvas.addEventListener("mousedown",()=>{
+        gIsDragging=true
+    })
+    gElCanvas.addEventListener("mouseup",()=>{
+        gIsDragging=false;
+    })
+    
+    
+}
 
