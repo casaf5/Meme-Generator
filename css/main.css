@@ -348,7 +348,7 @@ a {
     }
     .modal {
         flex-direction: column;
-        max-width: 448px;
+        max-width: 440px;
     }
     .modal.open {
         transform: translate(-50%, -30%);
