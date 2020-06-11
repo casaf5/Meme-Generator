@@ -78,6 +78,11 @@ header {
     flex-basis: 70%;
     letter-spacing: 1px;
     border: 2px solid black;
+    padding:5px;
+}
+
+.search-words>*{
+    padding:5px;
 }
 
 #search-box {
@@ -97,7 +102,6 @@ header {
     border: 3px solid black;
     display: grid;
     grid-template-columns: repeat(3, 300px);
-    grid-template-rows: repeat(5, 300px);
     grid-auto-rows: 300px;
     grid-auto-flow: dense;
     grid-auto-columns: 300px;
@@ -271,6 +275,10 @@ header {
 
 .flex.col {
     flex-direction: column;
+}
+
+.flex.wrap{
+    flex-wrap: wrap;
 }
 
 .clean-list {

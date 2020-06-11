@@ -4,7 +4,7 @@ var gElCanvas
 var gCtx
 var gIsClicked = false;
 var gLastPoint = { x: 0, y: 0 }
-var gKeywords = {'happy': 12 }
+var gKeywords = { 'happy': 12, 'man':20,'dog':5,'kiss':1,'hat':9,'baby':20,'glasses':20,'movie':30 }
 var gImgs = [{ id: 1, url: 'memes/1.jpg', keywords: ['tooth', 'trump', 'donald'] },
 { id: 2, url: 'memes/2.jpg', keywords: ['dogs', 'lick'] },
 { id: 3, url: 'memes/3.jpg', keywords: ['baby', 'sleep', 'dog'] },
@@ -15,7 +15,7 @@ var gImgs = [{ id: 1, url: 'memes/1.jpg', keywords: ['tooth', 'trump', 'donald']
 { id: 8, url: 'memes/8.jpg', keywords: ['hat', 'purpple', 'man'] },
 { id: 9, url: 'memes/9.jpg', keywords: ['baby', 'happy', 'little'] },
 { id: 10, url: 'memes/10.jpg', keywords: ['happy', 'laugh', 'barak', 'obama'] },
-{ id: 11, url: 'memes/11.jpg', keywords: ['kiss'] },
+{ id: 11, url: 'memes/11.jpg', keywords: ['kiss,man'] },
 { id: 12, url: 'memes/12.jpg', keywords: ['finger', 'glasses', 'israel', 'hands'] },
 { id: 13, url: 'memes/13.jpg', keywords: ['cheers', 'leonardo dicaprio', 'wine', 'glass', 'hand'] },
 { id: 14, url: 'memes/14.jpg', keywords: ['matrix', 'glasses'] },
@@ -24,6 +24,7 @@ var gImgs = [{ id: 1, url: 'memes/1.jpg', keywords: ['tooth', 'trump', 'donald']
 { id: 17, url: 'memes/16.jpg', keywords: ['vladimir putin', 'russia', 'suit', 'hands'] },
 { id: 18, url: 'memes/16.jpg', keywords: ['toystory', 'bazz', 'woody', 'movie', 'cartoon'] },
 ];
+var gSavedMemes = []
 var gMeme = {
     selectedImgId: 0,
     selectedLineIdx: 0,
@@ -54,6 +55,7 @@ function init() {
     gElCanvas = document.getElementById('my-canvas')
     gCtx = gElCanvas.getContext('2d')
     rednerPictures()
+    renderSearchedWords()
 }
 
 function onEditNewTxt(elTxt) {
@@ -183,7 +185,7 @@ function changeTextColor(color) {
     drawMeme()
 }
 
-function filterImages(searchTxt) {
+function filterImages(searchTxt) {              //!ADD SUPPORTS for more then 1 word 
     var images = gImgs.reduce((acc, image) => {
         if (image.keywords.join('').includes(searchTxt)) acc.push(image)
         return acc
@@ -193,4 +195,19 @@ function filterImages(searchTxt) {
 
 function getImages() {
     return gImgs;
+}
+
+function getSavedMemes() {
+    var memes = loadFromStorage('gSavedMemes')
+    return memes
+}
+
+function saveMeme(meme) {
+    gSavedMemes = !loadFromStorage('gSavedMemes') ? [] : loadFromStorage('gSavedMemes')
+    gSavedMemes.push(meme)
+    saveToStorage('gSavedMemes', gSavedMemes)
+}
+
+function getKeyWords(){
+    return gKeywords;
 }

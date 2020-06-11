@@ -18,7 +18,7 @@
                     <a href="/index.html"> <i class="fas fa-palette fa-2x"></i>Gallary</a>
                 </li>
                 <li>
-                    <a onclick="loadMemes()"><i class="fas fa-save fa-2x"></i>Your Memes</a>
+                    <a onclick="renderSavedMemes()"><i class="fas fa-save fa-2x"></i>Your Memes</a>
                 </li>
                 <li>
                     <a href="#about"><i class="fas fa-address-card fa-2x"></i>About</a>
@@ -34,7 +34,7 @@
             <button class="btn-reset">Reset Meme</button>
             <div class="meme-actions flex space-between">
                 <button class="btn-action">Share</button>
-                <button class="btn-action">Save</button>
+                <button class="btn-action" onclick="onSaveMeme()">Save</button>
                 <a class="btn-action" href="#" onclick="onDownloadCanvas(this)" download="">Download</a>
             </div>
         </div>
@@ -91,8 +91,7 @@
                 <input type="text" id="search-box" placeholder="Search Your Meme" >
                 <i class="fas fa-search fa-2x" onclick="onFilterImages()"></i>
             </div>
-            <div class="search-words flex center">
-                happy,hat,boy,women....
+            <div class="search-words flex wrap">
             </div>
         </div>
         <div class="image-container container">
@@ -106,6 +105,7 @@
     </footer>
 
     <script src="https://kit.fontawesome.com/f334b000b4.js" crossorigin="anonymous"></script>
+    <script src="js/meme-storage.js"></script>
     <script src="js/meme-server.js"></script>
     <script src="js/meme-controller.js"></script>
 </body>
