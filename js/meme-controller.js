@@ -64,19 +64,31 @@ function onFilterImages(searchTxt) {
     renderSearchedWords()
 }
 
-function onSetOpacity(value){
-    document.getElementById('label-opacity').innerText=`Text Opacity : ${value}`
+function onSetOpacity(value) {
+    document.getElementById('label-opacity').innerText = `Text Opacity : ${value}`
     changeTextOpcity(value)
 }
 
-function startEventListeners(){
-    gElCanvas.addEventListener("mousedown",()=>{
-        gIsDragging=true
+function startEventListeners() {
+    gElCanvas.addEventListener("mousedown", (downEv) => {
+        gIsDragging = true
+        onStartDrag(downEv)
     })
-    gElCanvas.addEventListener("mouseup",()=>{
-        gIsDragging=false;
+    gElCanvas.addEventListener("mouseup", () => {
+        gIsDragging = false;
+        gElCanvas.removeEventListener('mousemove', setLinePosition)
     })
-    
-    
+}
+function onStartDrag(downEv) {
+    downEv.preventDefault()
+    if (gIsDragging) {
+        gElCanvas.addEventListener('mousemove', setLinePosition)
+    }
+}
+function setLinePosition(ev) {
+    var currLine = getCurrLine()
+    currLine.posX = ev.offsetX 
+    currLine.posY = ev.offsetY
+    drawMeme()
 }
 
