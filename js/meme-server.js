@@ -239,7 +239,6 @@ function filterImages(searchTxt) {              //!ADD SUPPORTS for more then 1 
 function removeLine() {             
     gMeme.lines.splice(gMeme.selectedLineIdx, 1)
     gMeme.selectedLineIdx = 0;
-    console.log(gMeme.lines)
     drawMeme()
 }
 

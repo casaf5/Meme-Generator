@@ -7,12 +7,10 @@
     src: url('../css/fonts/Piedra-Regular.ttf');
 }
 
-/* @font-face {
-    font-family: memeimpact;
-    src: url('../css/fonts/impact.ttf');
-    color: black;
-    font-weight: 800; */
-/* } */
+@font-face {
+    font-family: airen;
+    src: url('../css/fonts/Airin.ttf');
+}
 
 body {
     margin: 0;
@@ -43,7 +41,8 @@ header {
     border-inline-start: 2px solid black;
     transition: transform .3s;
 }
-.main-nav li:hover{
+
+.main-nav li:hover {
     transform: scale(1.05);
 }
 
@@ -88,6 +87,7 @@ header {
     align-items: center;
     justify-content: center;
 }
+
 }
 
 .search-words>* {
@@ -138,7 +138,7 @@ header {
     width: 70%;
     top: 50%;
     left: 50%;
-    background-color:#eadada;
+    background-color: #eadada;
     transform: translate(-50%, -175%);
     border: 3px solid black;
     visibility: hidden;
@@ -237,6 +237,8 @@ header {
     right: 420px;
 }
 
+
+
 /* STICKERS-CONTAINER */
 
 .stickers-container {
@@ -244,16 +246,16 @@ header {
     width: 95%;
     border: 3px solid black;
     margin: 10px auto;
-    padding:10px;
+    padding: 10px;
     border-radius: 20px;
-    display:grid;
-    grid-template-columns: repeat(5,1fr);
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     grid-auto-rows: 1fr;
     justify-items: center;
     overflow: scroll;
-    
 }
-.stickers-container img{
+
+.stickers-container img {
     width: 60px;
     height: 60px;
     cursor: pointer;
@@ -266,14 +268,53 @@ header {
     margin-block-start: 10px
 }
 
-/* ABOUT */
+/* ABOUT/CONTACT */
 
 .about {
     margin: 10px auto;
+}
+
+footer .social-nav ul>* {
+    width: 40px;
+    height: 40px;
+    padding-top: 10px;
     text-align: center;
-    height: 100px;
-    padding: 10px;
-    border: orange solid 3px;
+    border-radius: 20px;
+    background-color: #e5e5e5;
+}
+
+.social-nav ul li:first-child {
+    margin-right: 10px;
+}
+
+.social-nav .icon {
+    width: 25px;
+    height: 25px;
+    transition: all 0.5s;
+}
+
+.facebook:hover {
+    cursor: pointer;
+    color: white;
+    background-color: #3b5998;
+    transform: scale(1.1);
+}
+
+.github:hover {
+    cursor: pointer;
+    color: black;
+    background-color: #6cc644;
+    transform: scale(1.2);
+}
+
+.profile {
+    justify-content: center;
+}
+
+.profile h4 {
+    font-size: 3rem;
+    font-family: airen, sans-serif;
+    margin: 0;
 }
 
 /* HELPERS */
@@ -309,6 +350,7 @@ header {
 .flex.wrap {
     flex-wrap: wrap;
 }
+
 .clean-list {
     list-style: none;
     text-decoration: none;
@@ -323,6 +365,9 @@ header {
 a {
     text-decoration: none;
     color: black;
+    cursor: pointer;
+}
+.fas{
     cursor: pointer;
 }
 
@@ -341,7 +386,6 @@ a {
     visibility: visible;
     opacity: 1;
 }
-
 
 /* SCREEN-OPTIMIZATION */
 
@@ -374,8 +418,8 @@ a {
     .search-bar, .search-words {
         width: 100%;
     }
-    .search-words{
-        height:58px;
+    .search-words {
+        height: 58px;
     }
     .modal {
         flex-direction: column;
