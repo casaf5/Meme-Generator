@@ -7,12 +7,12 @@
     src: url('../css/fonts/Piedra-Regular.ttf');
 }
 
-@font-face {
+/* @font-face {
     font-family: memeimpact;
     src: url('../css/fonts/impact.ttf');
     color: black;
-    font-weight: 800;
-}
+    font-weight: 800; */
+/* } */
 
 body {
     margin: 0;
@@ -135,7 +135,7 @@ header {
     width: 70%;
     top: 50%;
     left: 50%;
-    background-color: brown;
+    background-color:#eadada;
     transform: translate(-50%, -175%);
     border: 3px solid black;
     visibility: hidden;
@@ -211,11 +211,13 @@ header {
     margin: 10px 0;
 }
 
-.meme-settings .fas {
+.meme-settings div button {
     transition: transform .2s;
+    border-radius: 10px;
+    background-color: white;
 }
 
-.meme-settings .fas:hover {
+.meme-settings button:hover {
     cursor: pointer;
     transform: scale(1.2);
 }
@@ -304,7 +306,6 @@ header {
 .flex.wrap {
     flex-wrap: wrap;
 }
-
 .clean-list {
     list-style: none;
     text-decoration: none;

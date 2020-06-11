@@ -1,14 +1,11 @@
 'use strict';
-(() => {
-    saveToStorage('meme-default', gMeme)
-})
 
 var gElCanvas
 var gCtx
 var gIsDragging = false;
 var gLastPoint = { x: 0, y: 0 }
 var gKeywords = { 'happy': 12, 'man': 20, 'dog': 5, 'kiss': 1, 'hat': 9, 'baby': 20, 'glasses': 20, 'movie': 30 }
-var gImgs = [{ id: 1, url:'images/1.jpg', keywords: ['tooth', 'trump', 'donald'] },
+var gImgs = [{ id: 1, url: 'images/1.jpg', keywords: ['tooth', 'trump', 'donald'] },
 { id: 2, url: "images/2.jpg", keywords: ['dogs', 'lick'] },
 { id: 3, url: "images/3.jpg", keywords: ['baby', 'sleep', 'dog'] },
 { id: 4, url: "images/4.jpg", keywords: ['cat', 'keyboard', 'sleep'] },
@@ -26,7 +23,7 @@ var gImgs = [{ id: 1, url:'images/1.jpg', keywords: ['tooth', 'trump', 'donald']
 { id: 16, url: "images/16.jpg", keywords: ['movie', 'startrek', 'red shirt', 'hands'] },
 { id: 17, url: "images/17.jpg", keywords: ['vladimir putin', 'russia', 'suit', 'hands'] },
 { id: 18, url: "images/18.jpg", keywords: ['toystory', 'bazz', 'woody', 'movie', 'cartoon'] },
-{ id: 19, url: "images/19.jpg", keywords: ['lady','nature'] },
+{ id: 19, url: "images/19.jpg", keywords: ['lady', 'nature'] },
 { id: 20, url: "images/20.jpg", keywords: ['dance', 'boy', 'baby'] },
 ];
 var gSavedMemes = []
@@ -39,7 +36,7 @@ var gMeme = {
         txt: 'Top Text Line',
         size: 60, align: 'center',
         color: 'black',
-        font: 'memeimpact',
+        font: 'Impact',
         opacity: '100',
         posX: 250,
         posY: 50
@@ -49,7 +46,7 @@ var gMeme = {
         txt: 'Bottom Text Line',
         size: 40, align: 'center',
         color: 'black',
-        font: 'memeimpact',
+        font: 'Impact',
         opacity: '100',
         posX: 250,
         posY: 350
@@ -67,6 +64,7 @@ function init() {
     startEventListeners()
     rednerPictures()
     renderSearchedWords()
+    saveToStorage('meme-default', gMeme)
 }
 
 function drawMeme() {
@@ -87,14 +85,13 @@ function drawMeme() {
 function onEditNewTxt(elTxt) {
     var focusedLine = getCurrLine()
     focusedLine.txt = elTxt.value
-    gCtx.font = `${focusedLine.size}px memeimpact`
+    gCtx.font = `${focusedLine.size}px Impact`
     gCtx.align = `${focusedLine.align}`
     gCtx.textBaseline = "top"
     gCtx.fillText(focusedLine.txt, focusedLine.posX, focusedLine.posY,
         gCtx.measureText(focusedLine.txt).width, focusedLine.size)
     drawMeme()
     focusOnText(focusedLine)
-
 }
 
 function addNewTxt() {
@@ -103,14 +100,13 @@ function addNewTxt() {
         txt: 'Enter New Text',
         size: 30, align: 'center',
         color: 'black',
-        font: 'memeimpact',
+        font: 'Impact',
         opacity: 100,
         posX: gElCanvas.width / 2,
         posY: gElCanvas.height / 2,
     })
     gMeme.selectedLineIdx = gMeme.lines.length - 1
     drawMeme()
-
 }
 function setCanvasMeme(elImg) {
     gMeme.selectedImgId = +elImg.id
@@ -121,10 +117,9 @@ function setImage(imgId) {
     var elImg = new Image();
     elImg.src = img.url;
     gElCanvas.height = (elImg.height * gElCanvas.width) / elImg.width
-    gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height);     //!Add correct aspect ratio
+    gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height);    
+
 }
-
-
 function onChangeFontSize(diff) {
     var focusedLine = getCurrLine()
     focusedLine.size += diff
@@ -176,7 +171,7 @@ function focusByClick(ev) {
     })
     if (clickedIdx !== -1) {
         gMeme.selectedLineIdx = clickedIdx
-        document.getElementById('user-txt').value = setInputBoxValue(clickedIdx);
+        document.getElementById('user-txt').value = gMeme.lines[clickedIdx].txt
         document.getElementById('user-txt').select();
         document.getElementById('user-txt').focus();
         drawMeme()
@@ -192,7 +187,7 @@ function focusOnText(focusedLine) {
     gCtx.stroke()
 }
 function getWidth(line) {
-    gCtx.font = `${line.size}px memeimpact`
+    gCtx.font = `${line.size}px ${line.font}`
     return gCtx.measureText(line.txt).width
 }
 
@@ -241,13 +236,11 @@ function filterImages(searchTxt) {              //!ADD SUPPORTS for more then 1 
     }, [])
     return images
 }
-function removeLine() {             //!fix bug when removing ! 
+function removeLine() {             
     gMeme.lines.splice(gMeme.selectedLineIdx, 1)
     gMeme.selectedLineIdx = 0;
+    console.log(gMeme.lines)
     drawMeme()
 }
-function setInputBoxValue(lineIdx) {
-    var line = gMeme.lines.find(line => line.id === lineIdx)
-    return line.txt
-}
+
 
