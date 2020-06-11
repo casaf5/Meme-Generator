@@ -4,7 +4,7 @@ var gElCanvas
 var gCtx
 var gIsDragging = false;
 var gLastPoint = { x: 0, y: 0 }
-var gKeywords = { 'happy': 12, 'man': 20, 'dog': 5, 'kiss': 1, 'hat': 9, 'baby': 20, 'glasses': 20, 'movie': 30 }
+var gKeywords = { 'happy': 12, 'man': 20, 'dog': 5, 'kiss': 1, 'hat': 9, 'baby': 20, 'glasses': 20, 'movie': 30,'lol':10,'dance':20 }
 var gImgs = [{ id: 1, url: 'images/1.jpg', keywords: ['tooth', 'trump', 'donald'] },
 { id: 2, url: "images/2.jpg", keywords: ['dogs', 'lick'] },
 { id: 3, url: "images/3.jpg", keywords: ['baby', 'sleep', 'dog'] },

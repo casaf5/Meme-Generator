@@ -14,7 +14,7 @@ function renderSearchedWords() {
     elWords = document.querySelector('.search-words')
     elWords.innerText = ''
     for (word in words) {
-        var size = words[word] > 20 ? 20 : words[word]
+        var size = words[word]
         elWords.innerHTML += `<a class="a-word" style="font-size:${size * 2}px;" 
                                 onclick="onFilterImages('${word}')">${word}</a>`
     }

@@ -84,7 +84,10 @@ header {
     border: 3px solid black;
     padding: 5px;
     height: 100%;
-    overflow: hidden;
+    overflow: scroll;
+    align-items: center;
+    justify-content: center;
+}
 }
 
 .search-words>* {
@@ -231,7 +234,7 @@ header {
 .meme-settings>.fas {
     position: absolute;
     top: 27px;
-    right: 412px;
+    right: 420px;
 }
 
 /* STICKERS-CONTAINER */
