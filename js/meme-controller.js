@@ -3,7 +3,7 @@ function rednerPictures(images) {
     var elImgCon = document.querySelector('.image-container')
     var strHTML = ''
     strHTML += images.map(image => {
-        return `<a href="#meme-modal"><img src='../memes/${image.id}.jpg' 
+        return `<a href="#meme-modal"><img src='images/${image.id}.jpg' 
                 id="${image.id}" onclick="toggleModal(this)"/></a>`
     }).join('')
     elImgCon.innerHTML = strHTML
