@@ -8,11 +8,7 @@ var gCtx
 var gIsDragging = false;
 var gLastPoint = { x: 0, y: 0 }
 var gKeywords = { 'happy': 12, 'man': 20, 'dog': 5, 'kiss': 1, 'hat': 9, 'baby': 20, 'glasses': 20, 'movie': 30 }
-<<<<<<< HEAD
-var gImgs = [{ id: 1, url: "..//images/1.jpg", keywords: ['tooth', 'trump', 'donald'] },
-=======
 var gImgs = [{ id: 1, url: "https://https://github.com/casaf5/Meme-Generator/blob/master/memes/1.jpg", keywords: ['tooth', 'trump', 'donald'] },
->>>>>>> c75c73bbdfb11ef73c94161c1d0da33f3ebe495f
 { id: 2, url: "./memes/2.jpg", keywords: ['dogs', 'lick'] },
 { id: 3, url: "./memes/3.jpg", keywords: ['baby', 'sleep', 'dog'] },
 { id: 4, url: "./memes/4.jpg", keywords: ['cat', 'keyboard', 'sleep'] },
