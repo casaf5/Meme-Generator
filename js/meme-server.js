@@ -73,9 +73,6 @@ function init() {
 function drawMeme() {
     redrawImg()
     focusOnElement(gMeme.focusedEl)
-    // var currLine = getCurrLine()
-    // var currSticker = getCurrSticker();
-    // (currFocus === 'line') ? focusOnText(currLine) : focusOnSticker(currSticker)
     gMeme.lines.forEach(line => {
         gCtx.font = `${line.size}px ${line.font}`
         gCtx.fillStyle = line.color
@@ -92,8 +89,8 @@ function drawMeme() {
 
 function focusOnElement(focusedEl) {
     var element = focusedEl.element
-    if (!element)return     //in case there is nothing on canva.. 
-        gCtx.beginPath()
+    if (!element) return     //in case there is nothing on canva.. 
+    gCtx.beginPath()
     gCtx.strokeStyle = 'white'
     if (focusedEl.type === 'line') {
         var currWidth = getWidth(element)
@@ -132,9 +129,7 @@ function addNewTxt() {
     drawMeme()
 }
 function setCanvasMeme(elImg) {
-    gMeme = loadFromStorage('meme-default')
     gMeme.selectedImgId = +elImg.id
-    gMeme.focusedEl = { type: 'line', element: gMeme.lines[0] }
     setImage(gMeme.selectedImgId)
     drawMeme()
 }
@@ -143,47 +138,36 @@ function setImage(imgId) {
     var elImg = new Image();
     elImg.src = img.url;
     gElCanvas.height = (elImg.height * gElCanvas.width) / elImg.width
-    gMeme.lines[1].posY = gElCanvas.height - 50
+    gMeme.lines[1].posY = gElCanvas.height - 50 //for correct aspect ratio
     gMeme.elCurrImg = elImg
 }
 function redrawImg() {
     gCtx.drawImage(gMeme.elCurrImg, 0, 0, gElCanvas.width, gElCanvas.height)
 }
-function onChangeFontSize(diff) {
-    var focusedLine = getCurrLine()
-    focusedLine.size += diff
-    drawMeme()
-}
+
 function changeElementLocation(diff, posToChange) {
-    var focusedEl = getCurrLine()
+    var focusedOn = gMeme.focusedEl.element
     if (posToChange === 'x')
-        focusedEl.posX += diff
+        focusedOn.posX += diff
     else {
-        focusedEl.posY += diff
+        focusedOn.posY += diff
     }
     drawMeme()
 }
 
-function changeTextAlign(align) {
-    var line = getCurrLine()
-    line.align = align;
+function changeSettings(option, value) {
+    if (!gMeme.focusedEl.element) return
+    if (gMeme.focusedEl.type !== 'line' && option == 'size') {  //for sticker
+        var focusedOn = gMeme.focusedEl.element
+        focusedOn.width += value
+        focusedOn.height += value
+    } else {
+        var line = gMeme.focusedEl.element
+        line[option] = option !== 'size' ? value : line[option] + value
+    }
     drawMeme()
 }
-function changeTextColor(color) {
-    var line = getCurrLine()
-    line.color = color;
-    drawMeme()
-}
-function changeTextFont(value) {
-    var line = getCurrLine()
-    line.font = `${value}`;
-    drawMeme()
-}
-function changeTextOpcity(value) {
-    var line = getCurrLine()
-    line.opacity = value
-    drawMeme()
-}
+
 
 function focusByClick(ev) {
     ev.preventDefault()
@@ -208,11 +192,10 @@ function focusByClick(ev) {
             return sticker
     })
     if (clickedIdx !== -1) {
+        gMeme.selectedStickerIdx = clickedIdx
         gMeme.focusedEl = { type: 'sticker', element: gMeme.stickers[clickedIdx] }
         drawMeme()
     }
-
-
 }
 function getWidth(line) {
     gCtx.font = `${line.size}px ${line.font}`
@@ -233,6 +216,9 @@ function getCurrLine() {
 function getCurrSticker() {
     return gMeme.stickers[gMeme.selectedStickerIdx]
 }
+function getKeyWords() {
+    return gKeywords;
+}
 
 function getTextCoords(line, width) {
     switch (line.align) {
@@ -244,9 +230,6 @@ function getTextCoords(line, width) {
             return [line.posX - width / 2, line.posY]
     }
 }
-function getKeyWords() {
-    return gKeywords;
-}
 
 function saveMeme(meme) {
     gSavedMemes = !loadFromStorage('gSavedMemes') ? [] : loadFromStorage('gSavedMemes')
@@ -254,19 +237,21 @@ function saveMeme(meme) {
     saveToStorage('gSavedMemes', gSavedMemes)
 }
 function resetMeme() {
-    var currMemeIdx = gMeme.selectedImgId
+    var lastImgIdx = gMeme.selectedImgId
     gMeme = loadFromStorage('meme-default')
-    gMeme.selectedImgId = currMemeIdx
+    gMeme.selectedImgId = lastImgIdx
+    setImage(lastImgIdx)
     drawMeme()
 }
-function filterImages(searchTxt) {              //!ADD SUPPORTS for more then 1 word 
+function filterImages(searchTxt) {             
     var images = gImgs.reduce((acc, image) => {
         if (image.keywords.join('').includes(searchTxt)) acc.push(image)
         return acc
     }, [])
     return images
 }
-function removeLine() {
+function removeEl() {
+    if (!gMeme.focusedEl.element) return //if there is nothing in focus ..so it wont delete anything
     if (gMeme.focusedEl.type === 'line') {
         gMeme.lines.splice(gMeme.selectedLineIdx, 1)
         gMeme.selectedLineIdx = 0;

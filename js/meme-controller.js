@@ -5,7 +5,7 @@ function startEventListeners() {
     })
     gElCanvas.addEventListener("mouseup", () => {
         gIsDragging = false;
-        gElCanvas.removeEventListener('mousemove', setLinePosition)
+        gElCanvas.removeEventListener('mousemove', setPosition)
     })
 }
 function rednerPictures(images) {
@@ -56,7 +56,6 @@ function renderSavedMemes() {
         elImgCon.innerHTML = `<h1 style="grid-column:1/5;">Save Here Your Best And Favorite Memes !</h1>`
         return
     }
-    var strHTML = ''
     elImgCon.innerHTML = ''
     images.map(imgUrl => {
         var img = new Image();
@@ -70,14 +69,14 @@ function onDownloadCanvas(elLink) {
     const data = gElCanvas.toDataURL();
     elLink.href = data;
     elLink.download = 'my-meme';
-    elLink.innerText='Downloaded!'
-    elLink.style.backgroundColor='green'
+    elLink.innerText = 'Downloaded!'
+    elLink.style.backgroundColor = 'green'
 
 }
-function onSaveMeme(elSave) {         
+function onSaveMeme(elSave) {
     var meme = gElCanvas.toDataURL()
-    elSave.innerText='Meme Saved'
-    elSave.style.backgroundColor='green'
+    elSave.innerText = 'Meme Saved'
+    elSave.style.backgroundColor = 'green'
     saveMeme(meme)
 }
 function onFilterImages(searchTxt) {
@@ -90,20 +89,19 @@ function onFilterImages(searchTxt) {
 
 function onSetOpacity(value) {
     document.getElementById('label-opacity').innerText = `Text Opacity : ${value}`
-    changeTextOpcity(value)
+    changeSettings('opacity',value)
 }
 
 function onStartDrag(downEv) {
     downEv.preventDefault()
     if (gIsDragging) {
-        gElCanvas.addEventListener('mousemove', setLinePosition)
+        gElCanvas.addEventListener('mousemove', setPosition)
     }
 }
-function setLinePosition(ev) {
-    var currLine = getCurrLine()
-    // var diffX = ev.offsetX - currLine.x
-    currLine.posX = ev.offsetX
-    currLine.posY = ev.offsetY
+function setPosition(ev) {
+    var element = gMeme.focusedEl.element
+    element.posX = ev.offsetX
+    element.posY = ev.offsetY
     drawMeme()
 }
 
