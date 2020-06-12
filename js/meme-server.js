@@ -29,11 +29,12 @@ var gImgs = [{ id: 1, url: 'images/1.jpg', keywords: ['tooth', 'trump', 'donald'
 var gSavedMemes = []
 var gMeme = {
     elCurrImg: null,
-    linesCount: 2,
     selectedImgId: 0,
     selectedLineIdx: 0,
+    selectedStickerIdx: 0,
+    focusedEl: { type: 'line', element: null, },
     lines: [{
-        id: 0,
+        id: genID(),
         txt: 'Top Text Line',
         size: 60, align: 'center',
         color: 'black',
@@ -43,7 +44,7 @@ var gMeme = {
         posY: 20
     },
     {
-        id: 1,
+        id: genID(),
         txt: 'Bottom Text Line',
         size: 40, align: 'center',
         color: 'black',
@@ -51,7 +52,8 @@ var gMeme = {
         opacity: '100',
         posX: 250,
         posY: 300
-    }]
+    }],
+    stickers: []
 }
 var gSettings = {
     color: 'black',
@@ -70,8 +72,10 @@ function init() {
 
 function drawMeme() {
     redrawImg()
-    var currLine = getCurrLine()
-    focusOnText(currLine)
+    focusOnElement(gMeme.focusedEl)
+    // var currLine = getCurrLine()
+    // var currSticker = getCurrSticker();
+    // (currFocus === 'line') ? focusOnText(currLine) : focusOnSticker(currSticker)
     gMeme.lines.forEach(line => {
         gCtx.font = `${line.size}px ${line.font}`
         gCtx.fillStyle = line.color
@@ -80,9 +84,27 @@ function drawMeme() {
         gCtx.globalAlpha = line.opacity / 100
         gCtx.fillText(line.txt, line.posX, line.posY)
     })
+    gMeme.stickers.forEach(sticker => {
+        gCtx.drawImage(sticker.elSticker, sticker.posX, sticker.posY, sticker.width, sticker.height)
+    })
 
 }
 
+function focusOnElement(focusedEl) {
+    var element = focusedEl.element
+    if (!element)return     //in case there is nothing on canva.. 
+        gCtx.beginPath()
+    gCtx.strokeStyle = 'white'
+    if (focusedEl.type === 'line') {
+        var currWidth = getWidth(element)
+        const [x, y] = getTextCoords(element, currWidth)
+        gCtx.rect(x, y, currWidth, element.size)
+    } else {
+        gCtx.strokeStyle = 'white'
+        gCtx.rect(element.posX, element.posY, element.width, element.height)
+    }
+    gCtx.stroke()
+}
 function onEditNewTxt(elTxt) {
     var focusedLine = getCurrLine()
     focusedLine.txt = elTxt.value
@@ -97,7 +119,7 @@ function onEditNewTxt(elTxt) {
 
 function addNewTxt() {
     gMeme.lines.push({
-        id: ++gMeme.linesCount,
+        id: genID(),
         txt: 'Enter New Text',
         size: 30, align: 'center',
         color: 'black',
@@ -112,6 +134,7 @@ function addNewTxt() {
 function setCanvasMeme(elImg) {
     gMeme = loadFromStorage('meme-default')
     gMeme.selectedImgId = +elImg.id
+    gMeme.focusedEl = { type: 'line', element: gMeme.lines[0] }
     setImage(gMeme.selectedImgId)
     drawMeme()
 }
@@ -131,21 +154,16 @@ function onChangeFontSize(diff) {
     focusedLine.size += diff
     drawMeme()
 }
-function onChangeLineLocation(diff, posToChange) {
-    var focusedLine = getCurrLine()
+function changeElementLocation(diff, posToChange) {
+    var focusedEl = getCurrLine()
     if (posToChange === 'x')
-        focusedLine.posX += diff
+        focusedEl.posX += diff
     else {
-        focusedLine.posY += diff
+        focusedEl.posY += diff
     }
     drawMeme()
 }
 
-function onChangeTextFocus() {
-    gMeme.selectedLineIdx++
-    if (gMeme.selectedLineIdx >= gMeme.lines.length) gMeme.selectedLineIdx = 0
-    drawMeme()
-}
 function changeTextAlign(align) {
     var line = getCurrLine()
     line.align = align;
@@ -177,20 +195,24 @@ function focusByClick(ev) {
     })
     if (clickedIdx !== -1) {
         gMeme.selectedLineIdx = clickedIdx
+        gMeme.focusedEl = { type: 'line', element: gMeme.lines[clickedIdx] }
         document.getElementById('user-txt').value = gMeme.lines[clickedIdx].txt
         document.getElementById('user-txt').select();
         document.getElementById('user-txt').focus();
         drawMeme()
+        return
+    }
+    //Next- check for click on sticker:
+    clickedIdx = gMeme.stickers.findIndex(sticker => {
+        if (x >= sticker.posX && x <= sticker.posX + sticker.width && y >= sticker.posY && y <= sticker.posY + sticker.height)
+            return sticker
+    })
+    if (clickedIdx !== -1) {
+        gMeme.focusedEl = { type: 'sticker', element: gMeme.stickers[clickedIdx] }
+        drawMeme()
     }
 
-}
-function focusOnText(focusedLine) {
-    var currWidth = getWidth(focusedLine)
-    const [x, y] = getTextCoords(focusedLine, currWidth)
-    gCtx.beginPath()
-    gCtx.strokeStyle = 'white'
-    gCtx.rect(x, y, currWidth, focusedLine.size)
-    gCtx.stroke()
+
 }
 function getWidth(line) {
     gCtx.font = `${line.size}px ${line.font}`
@@ -207,6 +229,9 @@ function getSavedMemes() {
 }
 function getCurrLine() {
     return gMeme.lines[gMeme.selectedLineIdx]
+}
+function getCurrSticker() {
+    return gMeme.stickers[gMeme.selectedStickerIdx]
 }
 
 function getTextCoords(line, width) {
@@ -242,9 +267,28 @@ function filterImages(searchTxt) {              //!ADD SUPPORTS for more then 1 
     return images
 }
 function removeLine() {
-    gMeme.lines.splice(gMeme.selectedLineIdx, 1)
-    gMeme.selectedLineIdx = 0;
+    if (gMeme.focusedEl.type === 'line') {
+        gMeme.lines.splice(gMeme.selectedLineIdx, 1)
+        gMeme.selectedLineIdx = 0;
+    } else {
+        gMeme.stickers.splice(gMeme.selectedStickerIdx, 1)
+        gMeme.selectedStickerIdx = 0;
+    }
+    gMeme.focusedEl.element = gMeme.lines[0]
     drawMeme()
 }
+
+function addSticker(sticker) {
+    gCtx.drawImage(sticker, gElCanvas.width / 2, gElCanvas.height / 2, 60, 60)
+    gMeme.stickers.push({
+        id: genID(),
+        elSticker: sticker,
+        width: sticker.width,
+        height: sticker.height,
+        posX: gElCanvas.width / 2,
+        posY: gElCanvas.height / 2
+    })
+}
+
 
 

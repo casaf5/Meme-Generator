@@ -107,7 +107,7 @@ function setLinePosition(ev) {
     drawMeme()
 }
 
-function onAddSticker(elImg) {
-    gCtx.drawImage(elImg, gElCanvas.width / 2, gElCanvas.height / 2, 60, 60)
+function onAddSticker(elSticker) {
+    addSticker(elSticker)
 }
 

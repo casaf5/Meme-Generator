@@ -50,10 +50,10 @@
             <div class="text-location flex col">
                 <h5 class="section-head">Text Location Control:</h5>
                 <div class="flex space-around">
-                    <button onclick="onChangeLineLocation(-50,'y')"><i class="fas fa-arrow-up fa-3x"></i></button>
-                    <button onclick="onChangeLineLocation(50,'y')"><i class="fas fa-arrow-down fa-3x"></i></button>
-                    <button onclick="onChangeLineLocation(-50,'x')"><i class="fas fa-arrow-left fa-3x"></i></button>
-                    <button onclick="onChangeLineLocation(50,'x')"><i class="fas fa-arrow-right fa-3x"></i></button>
+                    <button onclick="changeElementLocation(-50,'y')"><i class="fas fa-arrow-up fa-3x"></i></button>
+                    <button onclick="changeElementLocation(50,'y')"><i class="fas fa-arrow-down fa-3x"></i></button>
+                    <button onclick="changeElementLocation(-50,'x')"><i class="fas fa-arrow-left fa-3x"></i></button>
+                    <button onclick="changeElementLocation(50,'x')"><i class="fas fa-arrow-right fa-3x"></i></button>
                 </div>
             </div>
             <div class="text-decoration flex col ">
@@ -135,6 +135,7 @@
     </footer>
 
     <script src="https://kit.fontawesome.com/f334b000b4.js" crossorigin="anonymous"></script>
+    <script src="js/util.js"></script>
     <script src="js/meme-storage.js"></script>
     <script src="js/meme-controller.js"></script>
     <script src="js/meme-server.js"></script>
