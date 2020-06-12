@@ -42,6 +42,9 @@ function onDownloadCanvas(elLink) {
     const data = gElCanvas.toDataURL();
     elLink.href = data;
     elLink.download = 'my-meme';
+    elLink.innerText='Downloaded!'
+    elLink.style.backgroundColor='green'
+
 }
 
 function renderSavedMemes() {
@@ -64,8 +67,10 @@ function renderSavedMemes() {
     })
 }
 
-function onSaveMeme() {         //!add indication that the meme saved
+function onSaveMeme(elSave) {         //!add indication that the meme saved
     var meme = gElCanvas.toDataURL()
+    elSave.innerText='Meme Saved'
+    elSave.style.backgroundColor='green'
     saveMeme(meme)
 }
 function onFilterImages(searchTxt) {

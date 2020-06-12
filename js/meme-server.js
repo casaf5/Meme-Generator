@@ -4,7 +4,7 @@ var gElCanvas
 var gCtx
 var gIsDragging = false;
 var gLastPoint = { x: 0, y: 0 }
-var gKeywords = { 'happy': 12, 'man': 20, 'dog': 5, 'kiss': 1, 'hat': 9, 'baby': 20, 'glasses': 20, 'movie': 30,'lol':10,'dance':20 }
+var gKeywords = { 'happy': 12, 'man': 20, 'dog': 5, 'kiss': 1, 'hat': 9, 'baby': 20, 'glasses': 20, 'movie': 30, 'lol': 10, 'dance': 20 }
 var gImgs = [{ id: 1, url: 'images/1.jpg', keywords: ['tooth', 'trump', 'donald'] },
 { id: 2, url: "images/2.jpg", keywords: ['dogs', 'lick'] },
 { id: 3, url: "images/3.jpg", keywords: ['baby', 'sleep', 'dog'] },
@@ -39,7 +39,7 @@ var gMeme = {
         font: 'Impact',
         opacity: '100',
         posX: 250,
-        posY: 50
+        posY: 20
     },
     {
         id: 1,
@@ -49,7 +49,7 @@ var gMeme = {
         font: 'Impact',
         opacity: '100',
         posX: 250,
-        posY: 350
+        posY: 300
     }]
 }
 var gSettings = {
@@ -109,6 +109,7 @@ function addNewTxt() {
     drawMeme()
 }
 function setCanvasMeme(elImg) {
+    gMeme = loadFromStorage('meme-default')
     gMeme.selectedImgId = +elImg.id
     drawMeme()
 }
@@ -117,7 +118,8 @@ function setImage(imgId) {
     var elImg = new Image();
     elImg.src = img.url;
     gElCanvas.height = (elImg.height * gElCanvas.width) / elImg.width
-    gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height);    
+    gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height);
+    gMeme.lines[1].posY = gElCanvas.height - 50
 
 }
 function onChangeFontSize(diff) {
@@ -221,7 +223,6 @@ function saveMeme(meme) {
     gSavedMemes = !loadFromStorage('gSavedMemes') ? [] : loadFromStorage('gSavedMemes')
     gSavedMemes.push(meme)
     saveToStorage('gSavedMemes', gSavedMemes)
-    toggleModal()
 }
 function resetMeme() {
     var currMemeIdx = gMeme.selectedImgId
@@ -236,7 +237,7 @@ function filterImages(searchTxt) {              //!ADD SUPPORTS for more then 1 
     }, [])
     return images
 }
-function removeLine() {             
+function removeLine() {
     gMeme.lines.splice(gMeme.selectedLineIdx, 1)
     gMeme.selectedLineIdx = 0;
     drawMeme()

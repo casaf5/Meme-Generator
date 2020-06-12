@@ -27,14 +27,19 @@
         </div>
     </header>
     <!-- MODAL -->
-    <div class="modal container flex space-between" id="meme-modal">
+    <div class="modal container flex space-around" id="meme-modal">
         <div class="meme-container flex col space-between ">
             <canvas id="my-canvas" width="500" height="500" style="border:1px solid black;"
                 onmousedown="focusByClick(event)"></canvas>
+              
             <button class="btn-reset" onclick="resetMeme()">Reset Meme</button>
             <div class="meme-actions flex space-between">
-                <button class="btn-action">Share</button>
-                <button class="btn-action" onclick="onSaveMeme()">Save</button>
+                <button class="btn-action" onclick="onSaveMeme(this)">Save</button>
+                <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+                    <input name="img" id="imgData" type="hidden" />
+                    <button class="btn-action " type="submit" id="share-img">Upload & Share</button>
+                    <div class="share-container"></div>
+                  </form>
                 <a class="btn-action" href="#" onclick="onDownloadCanvas(this)" download="">Download</a>
             </div>
         </div>
@@ -62,9 +67,9 @@
                     <!-- <button onclick="onChangeTextFocus()">switch focus</button> -->
                 </div>
                 <select id="user-font" onchange="changeTextFont(this.value)" value="Impact">
-                    <option value="memeimpact">Impact</option>
-                    <option value="arial">Arial</option>
-                    <option value="movoscape">Monoscape</option>
+                    <option value="Impact">Impact</option>
+                    <option value="Arial">Arial</option>
+                    <option value="Monoscape">Monoscape</option>
                     <option value="Courier New">Courier-New</option>
                 </select>
             </div>
@@ -133,6 +138,8 @@
     <script src="js/meme-storage.js"></script>
     <script src="js/meme-controller.js"></script>
     <script src="js/meme-server.js"></script>
+    <script src="js/meme-upload.js"></script>
+
 </body>
 
 </html>

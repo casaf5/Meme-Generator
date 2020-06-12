@@ -38,6 +38,7 @@ header {
 .main-nav li {
     height: 70px;
     padding: 10px;
+
     border-inline-start: 2px solid black;
     transition: transform .3s;
 }
@@ -80,14 +81,13 @@ header {
 .search-words {
     flex-basis: 70%;
     letter-spacing: 1px;
+    background-color: #fb9624;
     border: 3px solid black;
     padding: 5px;
     height: 100%;
     overflow: scroll;
     align-items: center;
     justify-content: center;
-}
-
 }
 
 .search-words>* {
@@ -168,7 +168,14 @@ header {
     text-align: center;
     background-color: rgba(255, 248, 220, 0.801);
     transition: all .3s;
+    outline: none;
 }
+
+#share-img.succses ,#share-img a {
+    color: white;
+    background-color: #3b5998;
+}
+
 
 .meme-container .meme-actions .btn-action:hover {
     cursor: pointer;
@@ -186,7 +193,7 @@ header {
 }
 
 .meme-container .btn-reset:hover {
-    background-color: crimson;
+    background-color: red;
     cursor: pointer;
 }
 
@@ -236,8 +243,6 @@ header {
     top: 27px;
     right: 420px;
 }
-
-
 
 /* STICKERS-CONTAINER */
 
@@ -290,19 +295,21 @@ footer .social-nav ul>* {
 .social-nav .icon {
     width: 25px;
     height: 25px;
-    transition: all 0.5s;
+    transition: all 0.3s;
 }
 
 .facebook:hover {
     cursor: pointer;
-    color: white;
     background-color: #3b5998;
     transform: scale(1.1);
 }
 
+.facebook .icon:hover {
+    color: white;
+}
+
 .github:hover {
     cursor: pointer;
-    color: black;
     background-color: #6cc644;
     transform: scale(1.2);
 }
@@ -364,10 +371,11 @@ footer .social-nav ul>* {
 
 a {
     text-decoration: none;
-    color: black;
     cursor: pointer;
+    color:black;
 }
-.fas{
+
+.fas {
     cursor: pointer;
 }
 
@@ -423,19 +431,25 @@ a {
     }
     .modal {
         flex-direction: column;
-        max-width: 440px;
+        width: 100%;
+    }
+    #my-canvas {
+        margin-bottom: 10px;
+    }
+    .meme-container .btn-reset {
+        margin-bottom: 10px;
     }
     .modal.open {
         transform: translate(-50%, -30%);
     }
     .meme-settings>.fas {
         position: absolute;
-        top: 642px;
-        right: 394px;
+        top: 525px;
+        right: 388px;
     }
     .meme-settings input~.fas {
         position: absolute;
-        top: 640px;
-        right: 9px;
+        top: 525px;
+        right: 8px;
     }
 }
