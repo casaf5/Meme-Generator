@@ -28,6 +28,7 @@ var gImgs = [{ id: 1, url: 'images/1.jpg', keywords: ['tooth', 'trump', 'donald'
 ];
 var gSavedMemes = []
 var gMeme = {
+    elCurrImg: null,
     linesCount: 2,
     selectedImgId: 0,
     selectedLineIdx: 0,
@@ -68,7 +69,7 @@ function init() {
 }
 
 function drawMeme() {
-    setImage(gMeme.selectedImgId)
+    redrawImg()
     var currLine = getCurrLine()
     focusOnText(currLine)
     gMeme.lines.forEach(line => {
@@ -111,6 +112,7 @@ function addNewTxt() {
 function setCanvasMeme(elImg) {
     gMeme = loadFromStorage('meme-default')
     gMeme.selectedImgId = +elImg.id
+    setImage(gMeme.selectedImgId)
     drawMeme()
 }
 function setImage(imgId) {
@@ -118,9 +120,11 @@ function setImage(imgId) {
     var elImg = new Image();
     elImg.src = img.url;
     gElCanvas.height = (elImg.height * gElCanvas.width) / elImg.width
-    gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height);
     gMeme.lines[1].posY = gElCanvas.height - 50
-
+    gMeme.elCurrImg = elImg
+}
+function redrawImg() {
+    gCtx.drawImage(gMeme.elCurrImg, 0, 0, gElCanvas.width, gElCanvas.height)
 }
 function onChangeFontSize(diff) {
     var focusedLine = getCurrLine()
