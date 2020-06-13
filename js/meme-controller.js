@@ -61,7 +61,6 @@ function renderSavedMemes() {
     }
     elImgCon.innerHTML = ''
     images.map(imgUrl => {
-        // var img = new Image();
         var img = document.createElement('img')
         var href = document.createElement('a')
         img.src = imgUrl
