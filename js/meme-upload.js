@@ -33,3 +33,21 @@ function doUploadImg(elForm, onSuccess) {
     })
 }
 
+
+function onUserUploadImg(ev) {
+    var reader = new FileReader();
+    var elImg = new Image();
+    elImg.addEventListener('load', function () {
+        gElCanvas.height = (elImg.height * gElCanvas.width) / elImg.width
+        gMeme.lines[1].posY = gElCanvas.height - 50
+        gMeme.elCurrImg = elImg
+        drawMeme()
+    }, false);
+    reader.onload = function () {
+        elImg.src = reader.result;
+    };
+    reader.readAsDataURL(ev.target.files[0]);
+    document.querySelector('.modal').classList.toggle('open')
+    document.querySelector('.screen').classList.toggle('on')
+    renderStickers()
+}
