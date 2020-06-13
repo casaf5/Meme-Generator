@@ -148,6 +148,7 @@ function addNewTxt() {
 
 function changeElementLocation(diff, posToChange) {
     var focusedOn = gMeme.focusedEl.element
+    if(!element)return
     if (posToChange === 'x')
         focusedOn.posX += diff
     else {

@@ -64,11 +64,12 @@ header {
     margin: 10px auto;
 }
 
-@media (min-width:720px){
-    .search{
+@media (min-width:720px) {
+    .search {
         height: 120px;
     }
 }
+
 .search-bar {
     flex-basis: 30%;
     text-align: center;
@@ -468,7 +469,7 @@ a {
         top: 655px;
         right: 8px;
     }
-    .meme-container .meme-actions .btn-action{
-        font-size:1rem
+    .meme-container .meme-actions .btn-action {
+        font-size: 1rem
     }
 }

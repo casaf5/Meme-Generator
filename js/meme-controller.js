@@ -68,8 +68,10 @@ function renderSavedMemes() {
         img.height = '300'
         href.download = 'saved-meme'
         href.href = imgUrl
+        img.setAttribute('class','saved-img')
         href.appendChild(img)
         elImgCon.appendChild(href)
+
     })
 }
 function onDownloadCanvas(elLink) {
