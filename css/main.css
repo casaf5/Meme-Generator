@@ -73,9 +73,12 @@ header {
 }
 
 .search-bar .fas {
-    position: relative;
-    right: 42px;
+    
+    position: absolute;
+    left: 34%;
     cursor: pointer;
+    top: 10%;
+
 }
 
 .search-words {
@@ -100,6 +103,18 @@ header {
     border-radius: 20px;
     font-size: 1.5rem;
     padding: 10px;
+    outline: none;
+}
+
+#btn-upload{
+    height: 70px;
+    width: 250px;
+    margin-top: 10px;
+    font-family: piedra,sans-serif;
+    font-size: 1.5rem;
+    background-color: #fb9624;
+    border-radius: 20px;
+    cursor: pointer;
     outline: none;
 }
 

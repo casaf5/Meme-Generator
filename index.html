@@ -31,7 +31,7 @@
         <div class="meme-container flex col space-between ">
             <canvas id="my-canvas" width="500" height="500" style="border:1px solid black;"
                 onmousedown="focusByClick(event)"></canvas>
-              
+
             <button class="btn-reset" onclick="resetMeme()">Reset Meme</button>
             <div class="meme-actions flex space-between">
                 <button class="btn-action" onclick="onSaveMeme(this)">Save</button>
@@ -39,7 +39,7 @@
                     <input name="img" id="imgData" type="hidden" />
                     <button class="btn-action " type="submit" id="share-img">Upload & Share</button>
                     <div class="share-container"></div>
-                  </form>
+                </form>
                 <a class="btn-action" href="#" onclick="onDownloadCanvas(this)" download="">Download</a>
             </div>
         </div>
@@ -60,7 +60,8 @@
                 <h5 class="section-head">Text- Size | Alignment| Font</h5>
                 <div class="flex space-around">
                     <button onclick="changeSettings('align','left')"><i class="fas fa-align-left fa-3x"></i></button>
-                    <button onclick="changeSettings('align','center')"><i class="fas fa-align-justify fa-3x"></i></button>
+                    <button onclick="changeSettings('align','center')"><i
+                            class="fas fa-align-justify fa-3x"></i></button>
                     <button onclick="changeSettings('align','right')"><i class="fas fa-align-right fa-3x"></i></button>
                     <button onclick="changeSettings('size',10)"><i class="fas fa-plus fa-3x"></i></button>
                     <button onclick="changeSettings('size',-10)"><i class="fas fa-minus fa-3x"></i></button>
@@ -98,9 +99,12 @@
     <!-- MODAL-END -->
     <main>
         <div class="search container flex space-between">
-            <div class="search-bar flex center">
+            <div class="search-bar flex col  ">
                 <input type="text" id="search-box" placeholder="Search Your Meme">
                 <i class="fas fa-search fa-2x" onclick="onFilterImages()"></i>
+                <input type="file" id="file-upload" hidden="hidden" accept="image/*" onchange="onUploadImg(event)"/>
+                <button id="btn-upload" >Upload Image</button>
+
             </div>
             <div class="search-words flex wrap space-between">
             </div>

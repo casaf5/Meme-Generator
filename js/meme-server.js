@@ -37,7 +37,7 @@ var gMeme = {
         id: genID(),
         txt: 'Top Text Line',
         size: 60, align: 'center',
-        color: 'black',
+        color: 'white',
         font: 'Impact',
         opacity: '100',
         posX: 250,
@@ -47,7 +47,7 @@ var gMeme = {
         id: genID(),
         txt: 'Bottom Text Line',
         size: 40, align: 'center',
-        color: 'black',
+        color: 'white',
         font: 'Impact',
         opacity: '100',
         posX: 250,
@@ -85,6 +85,22 @@ function drawMeme() {
         gCtx.drawImage(sticker.elSticker, sticker.posX, sticker.posY, sticker.width, sticker.height)
     })
 
+}
+function setCanvasMeme(elImg) {
+    gMeme.selectedImgId = +elImg.id
+    setImage(gMeme.selectedImgId)
+    drawMeme()
+}
+function setImage(imgId) {
+    var img = gImgs.find(img => img.id === imgId)
+    var elImg = new Image();
+    elImg.src = img.url;
+    gElCanvas.height = (elImg.height * gElCanvas.width) / elImg.width
+    gMeme.lines[1].posY = gElCanvas.height - 50 //for correct aspect ratio
+    gMeme.elCurrImg = elImg
+}
+function redrawImg() {
+    gCtx.drawImage(gMeme.elCurrImg, 0, 0, gElCanvas.width, gElCanvas.height)
 }
 
 function focusOnElement(focusedEl) {
@@ -128,22 +144,7 @@ function addNewTxt() {
     gMeme.selectedLineIdx = gMeme.lines.length - 1
     drawMeme()
 }
-function setCanvasMeme(elImg) {
-    gMeme.selectedImgId = +elImg.id
-    setImage(gMeme.selectedImgId)
-    drawMeme()
-}
-function setImage(imgId) {
-    var img = gImgs.find(img => img.id === imgId)
-    var elImg = new Image();
-    elImg.src = img.url;
-    gElCanvas.height = (elImg.height * gElCanvas.width) / elImg.width
-    gMeme.lines[1].posY = gElCanvas.height - 50 //for correct aspect ratio
-    gMeme.elCurrImg = elImg
-}
-function redrawImg() {
-    gCtx.drawImage(gMeme.elCurrImg, 0, 0, gElCanvas.width, gElCanvas.height)
-}
+
 
 function changeElementLocation(diff, posToChange) {
     var focusedOn = gMeme.focusedEl.element
@@ -243,7 +244,7 @@ function resetMeme() {
     setImage(lastImgIdx)
     drawMeme()
 }
-function filterImages(searchTxt) {             
+function filterImages(searchTxt) {
     var images = gImgs.reduce((acc, image) => {
         if (image.keywords.join('').includes(searchTxt)) acc.push(image)
         return acc
