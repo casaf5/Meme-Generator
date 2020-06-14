@@ -44,12 +44,12 @@
             </div>
         </div>
         <div class="meme-settings flex col">
-            <i class="fas fa-plus-square fa-2x" onclick="onAddNewTxt()"></i>
+            <i class="add-txt fas fa-plus-square fa-2x" onclick="onAddNewTxt()"></i>
             <input type="text" id="user-txt" oninput="onEditNewTxt(this)" placeholder="Type Text Here">
-            <i class="fas fa-trash-alt fa-2x" onclick="onRemove()"></i>
+            <i class="remove-txt fas fa-trash-alt fa-2x" onclick="onRemove()"></i>
             <div class="text-location flex col">
                 <h5 class="section-head">Text Location Control:</h5>
-                <div class="flex space-around">
+                <div class="location flex space-around">
                     <button onclick="onChangeElementLocation(-1,'y')">
                         <i class="fas fa-arrow-up fa-3x"></i>
                     </button>
@@ -66,7 +66,7 @@
             </div>
             <div class="text-decoration flex col ">
                 <h5 class="section-head">Text- Size | Alignment| Font</h5>
-                <div class="flex space-around">
+                <div class="align flex space-around">
                     <button onclick="onChangeSettings('align','left')">
                         <i class="fas fa-align-left fa-3x"></i>
                     </button>
