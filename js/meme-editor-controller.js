@@ -1,6 +1,5 @@
 'use strict'
 
-
 function drawMeme() {
     var meme = getMeme()
     redrawImg(meme)
@@ -12,6 +11,7 @@ function drawMeme() {
         gCtx.textBaseline = "top"
         gCtx.globalAlpha = line.opacity / 100
         gCtx.fillText(line.txt, line.posX, line.posY)
+        onSetOpacity(line.opacity)
     })
     meme.stickers.forEach(sticker => {
         gCtx.drawImage(sticker.elSticker, sticker.posX, sticker.posY, sticker.width, sticker.height)
@@ -25,11 +25,9 @@ function focusByClick(ev) {
     var meme = getMeme()
     var [x, y] = [0, 0]
     if (ev.type === "touchstart") {
-        [x, y] = [ev.touches[0].clientX, ev.touches[0].clientY]
+        ({ x, y } = getTouchCoords({ x: ev.touches[0].pageX, y: ev.touches[0].pageY }))
     }
-    else {
-        [x, y] = [ev.offsetX, ev.offsetY]
-    }
+    else[x, y] = [ev.offsetX, ev.offsetY]
     var clickedIdx = meme.lines.findIndex(line => {
         var lineWidth = getWidth(line)
         if (x >= line.posX - lineWidth / 2 && x <= (line.posX - lineWidth / 2) + lineWidth && y >= line.posY && y <= line.posY + line.size)
@@ -88,6 +86,7 @@ function onSaveMeme(elSave) {
     saveMeme(meme)
 }
 function onSetOpacity(value) {
+    // debugger
     document.getElementById('label-opacity').innerText = `Text Opacity : ${value}`
     changeSettings('opacity', value)
 }
@@ -97,17 +96,25 @@ function onStartDrag(downEv) {
     if (gIsDragging) {
         gElCanvas.addEventListener("touchmove", onSetPosition)
         gElCanvas.addEventListener("mousemove", onSetPosition)
-
     }
 }
 function onSetPosition(ev) {
     var element = getCurrElement()
     var nextX;
     var nextY;
-    (ev.type === "touchmove") ? [nextX, nextY] = [ev.touches[0].clientX, ev.touches[0].clientY] : [ev.offsetX, ev.offsetY]
+    if (ev.type === "touchmove") {
+        ({ nextX, nextY } = getTouchCoords({ nextX: ev.touches[0].pageX, nextY: ev.touches[0].pageY }))
+    }
+    else { [nextX, nextY] = [ev.offsetX, ev.offsetY] }
     element.posX = nextX
     element.posY = nextY
     drawMeme()
+}
+
+function getTouchCoords(clientCoords) {
+    clientCoords.x = clientCoords.x - gElCanvas.offsetLeft
+    clientCoords.y = clientCoords.y - gElCanvas.offsetTop
+    return clientCoords
 }
 
 function onAddSticker(elSticker) {
@@ -115,9 +122,8 @@ function onAddSticker(elSticker) {
 }
 
 function onRemove() {
-    var elToRemove = getCurrElement()
     if (!gMeme.focusedEl.element) return
-    removeEl(elToRemove)
+    removeEl()
     drawMeme()
 }
 

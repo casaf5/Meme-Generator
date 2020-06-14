@@ -31,17 +31,18 @@ var gMeme = {
     stickers: []
 }
 
-function _createMemeImg(id, url, words = []) {
+function _createMemeImg(id, url, keywords = []) {
     var newMeme = {
         id,
         url,
-        words,
+        keywords,
     }
     return newMeme;
 }
 
 function _createMemeImages() {
     var memes = []
+    memes.push(_createMemeImg(genID(), 'images/0.jpg', ['dance', 'boy', 'baby']))
     memes.push(_createMemeImg(genID(), 'images/1.jpg', ['tooth', 'trump', 'donald']))
     memes.push(_createMemeImg(genID(), 'images/2.jpg', ['dogs', 'lick']))
     memes.push(_createMemeImg(genID(), 'images/3.jpg', ['baby', 'sleep', 'dog']))
@@ -61,15 +62,12 @@ function _createMemeImages() {
     memes.push(_createMemeImg(genID(), 'images/17.jpg', ['vladimir putin', 'russia', 'suit', 'hands']))
     memes.push(_createMemeImg(genID(), 'images/18.jpg', ['toystory', 'bazz', 'woody', 'movie', 'cartoon']))
     memes.push(_createMemeImg(genID(), 'images/19.jpg', ['lady', 'nature']))
-    memes.push(_createMemeImg(genID(), 'images/20.jpg', ['dance', 'boy', 'baby']))
     return memes;
 }
 
 function setCanvasMeme(imgId) {
+    gMeme = loadFromStorage('meme-default')
     gMeme.selectedImgId = imgId
-    setImage(gMeme.selectedImgId)
-}
-function setImage(imgId) {
     var img = gMemeImgs.find(img => img.id === imgId)
     var elImg = new Image();
     elImg.src = img.url;
@@ -117,7 +115,7 @@ function changeElementLocation(diff, posToChange) {
 function changeSettings(option, value) {
     if (!gMeme.focusedEl.element) return
     if (gMeme.focusedEl.type !== 'line' && option == 'size') {  //for sticker
-        var focusedOn = gMeme.focusedEl.element
+        var focusedOn = getCurrElement()
         focusedOn.width += value
         focusedOn.height += value
     } else {
@@ -175,7 +173,7 @@ function resetMeme() {
     var lastImgIdx = gMeme.selectedImgId
     gMeme = loadFromStorage('meme-default')
     gMeme.selectedImgId = lastImgIdx
-    setImage(lastImgIdx)
+    setCanvasMeme(lastImgIdx)
     drawMeme()
 }
 function filterImages(searchTxt) {
@@ -185,7 +183,8 @@ function filterImages(searchTxt) {
     }, [])
     return images
 }
-function removeEl(el) {
+function removeEl() {
+    var el = gMeme.focusedEl
     if (el.type === 'line') {
         gMeme.lines.splice(gMeme.selectedLineIdx, 1)
         gMeme.selectedLineIdx = 0;

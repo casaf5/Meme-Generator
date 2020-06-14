@@ -21,19 +21,18 @@ function startEventListeners() {
         gIsDragging = false;
         gElCanvas.removeEventListener('mousemove', onSetPosition)
     })
-    //MOBILE-TOUCH
+    // MOBILE-TOUCH
     gElCanvas.addEventListener("touchstart",(downEv)=>{
-        console.log("touch start")
         focusByClick(downEv)
         gIsDragging = true
         onStartDrag(downEv)
     })
     gElCanvas.addEventListener("touchend",()=>{
-        console.log("touch end")
         gIsDragging = false
         gElCanvas.removeEventListener("touchmove", onSetPosition)
 
     })
+    //UPLOAD FILE BUTTON
     document.getElementById('btn-upload').addEventListener('click', () => {
         document.getElementById('file-upload').click()
     })
@@ -42,8 +41,8 @@ function rednerMemeImages(images) {
     var images = !images ? getMemeImages() : images;
     var elImgCon = document.querySelector('.image-container')
     var strHTML = ''
-    strHTML += images.map((image, idx) => {
-        return `<a href="#meme-modal"><img src='images/${idx + 1}.jpg' 
+    strHTML += images.map(image => {
+        return `<a href="#meme-modal"><img src=${image.url}
                 id="${image.id}" onclick="toggleModal('${image.id}')"/></a>`
     }).join('')
     elImgCon.innerHTML = strHTML
