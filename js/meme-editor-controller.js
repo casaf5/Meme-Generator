@@ -112,7 +112,6 @@ function getTouchCoords(calcCoords) {
     var canvasRect = gElCanvas.getBoundingClientRect()
     calcCoords.x = calcCoords.x - canvasRect.left
     calcCoords.y = calcCoords.y - canvasRect.top
-    console.log(calcCoords.x,calcCoords.y)
     return calcCoords
 }
 

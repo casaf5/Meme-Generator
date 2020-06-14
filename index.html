@@ -27,7 +27,7 @@
         </div>
     </header>
     <!-- MODAL -->
-    <div class="modal container flex space-around" id="meme-modal">
+    <div class="modal container flex space-around wrap" id="meme-modal">
         <div class="meme-container flex col space-between ">
             <canvas id="my-canvas" width="500" height="500" style="border:1px solid black;"
                 onmousedown="focusByClick(event)"></canvas>
@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="meme-settings flex col">
-            <div class="add-input-remove flex space-between">
+            <div class="add-input-remove flex space-around">
             <i class="add-txt fas fa-plus-square fa-2x" onclick="onAddNewTxt()"></i>
             <input type="text" id="user-txt" oninput="onEditNewTxt(this)" placeholder="Type Text Here">
             <i class="remove-txt fas fa-trash-alt fa-2x" onclick="onRemove()"></i>

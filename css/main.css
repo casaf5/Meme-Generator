@@ -323,16 +323,6 @@ a {
     .meme-container .meme-actions .btn-action {
         font-size: 1rem
     }
-    /* .meme-settings .remove-txt {
-        position: fixed;
-        top: 580px;
-        right: 6px;
-    }
-    .meme-settings .add-txt {
-        position: fixed;
-        left: 5px;
-        top: 581px;
-    } */
     #user-txt {
         margin: 0 auto;
     }
@@ -346,6 +336,5 @@ a {
     .text-decoration .align{
         justify-content: center;
         font-size: 1rem;
-
     }
 }

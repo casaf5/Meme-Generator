@@ -69,10 +69,16 @@
     flex-basis: 50%;
 }
 
+.add-input-remove{
+    margin-top: 10px;
+}
+.add-input-remove i{
+    margin-top: 9px;
+}
 #user-txt {
     width: 80%;
     height: 30px;
-    margin: 20px auto;
+    margin: 0 auto;
     text-align: center;
     font-size: 1.5rem;
     letter-spacing: 0.9px;
@@ -98,17 +104,6 @@
     transform: scale(1.2);
 }
 
-/* .meme-settings .remove-txt {
-    position: absolute;
-    top: 25px;
-    right: 9px
-}
-
-.meme-settings .add-txt {
-    position: absolute;
-    top: 27px;
-    right: 420px;
-} */
 
 /* STICKERS-CONTAINER */
 
