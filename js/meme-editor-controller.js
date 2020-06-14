@@ -25,7 +25,7 @@ function focusByClick(ev) {
     var meme = getMeme()
     var [x, y] = [0, 0]
     if (ev.type === "touchstart") {
-        ({ x, y } = getTouchCoords({ x: ev.touches[0].pageX, y: ev.touches[0].pageY }))
+        ({ x, y } = getTouchCoords({ x: ev.touches[0].clientX, y: ev.touches[0].clientY }))
     }
     else[x, y] = [ev.offsetX, ev.offsetY]
     var clickedIdx = meme.lines.findIndex(line => {
@@ -34,7 +34,6 @@ function focusByClick(ev) {
             return line
     })
     if (clickedIdx !== -1) {
-        //!fix this - no direct accses to service
         meme.selectedLineIdx = clickedIdx
         meme.focusedEl = { type: 'line', element: meme.lines[clickedIdx] }
         document.getElementById('user-txt').value = meme.lines[clickedIdx].txt
@@ -86,7 +85,6 @@ function onSaveMeme(elSave) {
     saveMeme(meme)
 }
 function onSetOpacity(value) {
-    // debugger
     document.getElementById('label-opacity').innerText = `Text Opacity : ${value}`
     changeSettings('opacity', value)
 }
@@ -100,21 +98,22 @@ function onStartDrag(downEv) {
 }
 function onSetPosition(ev) {
     var element = getCurrElement()
-    var nextX;
-    var nextY;
+    var [x, y] = [0, 0]
     if (ev.type === "touchmove") {
-        ({ nextX, nextY } = getTouchCoords({ nextX: ev.touches[0].pageX, nextY: ev.touches[0].pageY }))
+        ({ x, y } = getTouchCoords({ x: ev.touches[0].clientX, y: ev.touches[0].clientY }))
     }
-    else { [nextX, nextY] = [ev.offsetX, ev.offsetY] }
-    element.posX = nextX
-    element.posY = nextY
+    else { [x,y] = [ev.offsetX, ev.offsetY] }
+    element.posX = x
+    element.posY = y
     drawMeme()
 }
 
-function getTouchCoords(clientCoords) {
-    clientCoords.x = clientCoords.x - gElCanvas.offsetLeft
-    clientCoords.y = clientCoords.y - gElCanvas.offsetTop
-    return clientCoords
+function getTouchCoords(calcCoords) {
+    var canvasRect = gElCanvas.getBoundingClientRect()
+    calcCoords.x = calcCoords.x - canvasRect.left
+    calcCoords.y = calcCoords.y - canvasRect.top
+    console.log(calcCoords.x,calcCoords.y)
+    return calcCoords
 }
 
 function onAddSticker(elSticker) {
