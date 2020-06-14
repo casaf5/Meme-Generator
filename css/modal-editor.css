@@ -1,6 +1,9 @@
 /* SETTINGS FOR THE MODAL-MEME-EDITOR */
 
 .modal {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-rows: 1fr;
     position: absolute;
     width: 70%;
     top: 50%;
@@ -69,12 +72,23 @@
     flex-basis: 50%;
 }
 
-.add-input-remove{
+.add-input-remove {
     margin-top: 10px;
+    position: relative;
 }
-.add-input-remove i{
-    margin-top: 9px;
+
+.add-input-remove .add-txt {
+    position: absolute;
+    left: 3%;
+    top: 20%;
 }
+
+.add-input-remove .remove-txt{
+    position: absolute;
+    right: 3%;
+    top: 20%;
+}
+
 #user-txt {
     width: 80%;
     height: 30px;
@@ -103,7 +117,6 @@
     cursor: pointer;
     transform: scale(1.2);
 }
-
 
 /* STICKERS-CONTAINER */
 
