@@ -23,7 +23,13 @@ function redrawImg(currMeme) {
 function focusByClick(ev) {
     ev.preventDefault()
     var meme = getMeme()
-    const { offsetX: x, offsetY: y } = ev
+    var [x, y] = [0, 0]
+    if (ev.type === "touchstart") {
+        [x, y] = [ev.touches[0].clientX, ev.touches[0].clientY]
+    }
+    else {
+        [x, y] = [ev.offsetX, ev.offsetY]
+    }
     var clickedIdx = meme.lines.findIndex(line => {
         var lineWidth = getWidth(line)
         if (x >= line.posX - lineWidth / 2 && x <= (line.posX - lineWidth / 2) + lineWidth && y >= line.posY && y <= line.posY + line.size)
@@ -36,7 +42,6 @@ function focusByClick(ev) {
         document.getElementById('user-txt').value = meme.lines[clickedIdx].txt
         document.getElementById('user-txt').select();
         document.getElementById('user-txt').focus();
-        debugger
         drawMeme()
         return
     }
@@ -90,13 +95,18 @@ function onSetOpacity(value) {
 function onStartDrag(downEv) {
     downEv.preventDefault()
     if (gIsDragging) {
-        gElCanvas.addEventListener('mousemove', onSetPosition)
+        gElCanvas.addEventListener("touchmove", onSetPosition)
+        gElCanvas.addEventListener("mousemove", onSetPosition)
+
     }
 }
 function onSetPosition(ev) {
     var element = getCurrElement()
-    element.posX = ev.offsetX
-    element.posY = ev.offsetY
+    var nextX;
+    var nextY;
+    (ev.type === "touchmove") ? [nextX, nextY] = [ev.touches[0].clientX, ev.touches[0].clientY] : [ev.offsetX, ev.offsetY]
+    element.posX = nextX
+    element.posY = nextY
     drawMeme()
 }
 

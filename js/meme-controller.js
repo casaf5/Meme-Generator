@@ -12,6 +12,7 @@ function init() {
 }
 
 function startEventListeners() {
+    // DESKTOP
     gElCanvas.addEventListener("mousedown", (downEv) => {
         gIsDragging = true
         onStartDrag(downEv)
@@ -19,6 +20,19 @@ function startEventListeners() {
     gElCanvas.addEventListener("mouseup", () => {
         gIsDragging = false;
         gElCanvas.removeEventListener('mousemove', onSetPosition)
+    })
+    //MOBILE-TOUCH
+    gElCanvas.addEventListener("touchstart",(downEv)=>{
+        console.log("touch start")
+        focusByClick(downEv)
+        gIsDragging = true
+        onStartDrag(downEv)
+    })
+    gElCanvas.addEventListener("touchend",()=>{
+        console.log("touch end")
+        gIsDragging = false
+        gElCanvas.removeEventListener("touchmove", onSetPosition)
+
     })
     document.getElementById('btn-upload').addEventListener('click', () => {
         document.getElementById('file-upload').click()
