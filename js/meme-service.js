@@ -42,31 +42,31 @@ function _createMemeImg(id,url,words=[]) {
 
 function _createMemeImages() {
     var memes=[]
-    memes.push(_createMemeImg(genID(),'images/1.jpg'),['tooth', 'trump', 'donald'])
-    memes.push(_createMemeImg(genID(),'images/2.jpg'),['dogs', 'lick'])
-    memes.push(_createMemeImg(genID(),'images/3.jpg'),['baby', 'sleep', 'dog'])
-    memes.push(_createMemeImg(genID(),'images/4.jpg'),['cat', 'keyboard', 'sleep'])
-    memes.push(_createMemeImg(genID(),'images/5.jpg'),['win', 'badass', 'baby', 'beach'])
-    memes.push(_createMemeImg(genID(),'images/6.jpg'),['size', 'professor', 'man', 'hands'])
-    memes.push(_createMemeImg(genID(),'images/7.jpg'),['shock', 'baby', 'little'])
-    memes.push(_createMemeImg(genID(),'images/8.jpg'),['hat', 'purpple', 'man'] )
-    memes.push(_createMemeImg(genID(),'images/9.jpg'),['baby', 'happy', 'little'])
-    memes.push(_createMemeImg(genID(),'images/10.jpg'),['happy', 'laugh', 'barak', 'obama'])
-    memes.push(_createMemeImg(genID(),'images/11.jpg'),['kiss,man'] )
-    memes.push(_createMemeImg(genID(),'images/12.jpg'),['finger', 'glasses', 'israel', 'hands'])
-    memes.push(_createMemeImg(genID(),'images/13.jpg'),['cheers', 'leonardo dicaprio', 'wine', 'glass', 'hand'])
-    memes.push(_createMemeImg(genID(),'images/14.jpg'),['matrix', 'glasses'])
-    memes.push(_createMemeImg(genID(),'images/15.jpg'),['game of thrones', 'hair', 'hands'])
-    memes.push(_createMemeImg(genID(),'images/16.jpg'),['movie', 'startrek', 'red shirt', 'hands'])
-    memes.push(_createMemeImg(genID(),'images/17.jpg'),['vladimir putin', 'russia', 'suit', 'hands'])
-    memes.push(_createMemeImg(genID(),'images/18.jpg'),['toystory', 'bazz', 'woody', 'movie', 'cartoon'])
-    memes.push(_createMemeImg(genID(),'images/19.jpg'),['lady', 'nature'])
-    memes.push(_createMemeImg(genID(),'images/20.jpg'),['dance', 'boy', 'baby'])
+    memes.push(_createMemeImg(genID(),'images/1.jpg',['tooth', 'trump', 'donald']))
+    memes.push(_createMemeImg(genID(),'images/2.jpg',['dogs', 'lick']))
+    memes.push(_createMemeImg(genID(),'images/3.jpg',['baby', 'sleep', 'dog']))
+    memes.push(_createMemeImg(genID(),'images/4.jpg',['cat', 'keyboard', 'sleep']))
+    memes.push(_createMemeImg(genID(),'images/5.jpg',['win', 'badass', 'baby', 'beach']))
+    memes.push(_createMemeImg(genID(),'images/6.jpg',['size', 'professor', 'man', 'hands']))
+    memes.push(_createMemeImg(genID(),'images/7.jpg',['shock', 'baby', 'little']))
+    memes.push(_createMemeImg(genID(),'images/8.jpg',['hat', 'purpple', 'man'] ))
+    memes.push(_createMemeImg(genID(),'images/9.jpg',['baby', 'happy', 'little']))
+    memes.push(_createMemeImg(genID(),'images/10.jpg',['happy', 'laugh', 'barak', 'obama']))
+    memes.push(_createMemeImg(genID(),'images/11.jpg',['kiss,man'] ))
+    memes.push(_createMemeImg(genID(),'images/12.jpg',['finger', 'glasses', 'israel', 'hands']))
+    memes.push(_createMemeImg(genID(),'images/13.jpg',['cheers', 'leonardo dicaprio', 'wine', 'glass', 'hand']))
+    memes.push(_createMemeImg(genID(),'images/14.jpg',['matrix', 'glasses']))
+    memes.push(_createMemeImg(genID(),'images/15.jpg',['game of thrones', 'hair', 'hands']))
+    memes.push(_createMemeImg(genID(),'images/16.jpg',['movie', 'startrek', 'red shirt', 'hands']))
+    memes.push(_createMemeImg(genID(),'images/17.jpg',['vladimir putin', 'russia', 'suit', 'hands']))
+    memes.push(_createMemeImg(genID(),'images/18.jpg',['toystory', 'bazz', 'woody', 'movie', 'cartoon']))
+    memes.push(_createMemeImg(genID(),'images/19.jpg',['lady', 'nature']))
+    memes.push(_createMemeImg(genID(),'images/20.jpg',['dance', 'boy', 'baby']))
     return memes;
 }
 
-function setCanvasMeme(elImg) {
-    gMeme.selectedImgId = +elImg.id
+function setCanvasMeme(imgId) {
+    gMeme.selectedImgId = imgId
     setImage(gMeme.selectedImgId)
 }
 function setImage(imgId) {

@@ -3,8 +3,8 @@
 
 function drawMeme() {
     var meme = getMeme()
-    redrawImg()
-    focusOnElement()
+    redrawImg(meme)
+    focusOnElement(meme)
     meme.lines.forEach(line => {
         gCtx.font = `${line.size}px ${line.font}`
         gCtx.fillStyle = line.color
@@ -17,8 +17,8 @@ function drawMeme() {
         gCtx.drawImage(sticker.elSticker, sticker.posX, sticker.posY, sticker.width, sticker.height)
     })
 }
-function redrawImg() {
-    gCtx.drawImage(gMeme.elCurrImg, 0, 0, gElCanvas.width, gElCanvas.height)
+function redrawImg(currMeme) {
+    gCtx.drawImage(currMeme.elCurrImg, 0, 0, gElCanvas.width, gElCanvas.height)
 }
 function focusByClick(ev) {
     ev.preventDefault()
@@ -36,6 +36,7 @@ function focusByClick(ev) {
         document.getElementById('user-txt').value = meme.lines[clickedIdx].txt
         document.getElementById('user-txt').select();
         document.getElementById('user-txt').focus();
+        debugger
         drawMeme()
         return
     }
@@ -51,12 +52,12 @@ function focusByClick(ev) {
     }
 }
 
-function focusOnElement() {
+function focusOnElement(currMeme) {
     var element = getCurrElement()
     if (!element) return     //in case there is nothing on canva.. 
     gCtx.beginPath()
     gCtx.strokeStyle = 'white'
-    if (element.type === 'line') {
+    if (currMeme.focusedEl.type === 'line') {
         var currWidth = getWidth(element)
         const [x, y] = getTextCoords(element, currWidth)
         gCtx.rect(x, y, currWidth, element.size)

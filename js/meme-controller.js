@@ -30,7 +30,7 @@ function rednerMemeImages(images) {
     var strHTML = ''
     strHTML += images.map((image, idx) => {
         return `<a href="#meme-modal"><img src='images/${idx + 1}.jpg' 
-                id="${image.id}" onclick="toggleModal(this)"/></a>`
+                id="${image.id}" onclick="toggleModal('${image.id}')"/></a>`
     }).join('')
     elImgCon.innerHTML = strHTML
 }
@@ -55,11 +55,11 @@ function renderStickers() {
     }
     elSContainer.innerHTML = strHtml
 }
-function toggleModal(elImg) {
+function toggleModal(imgId) {
     document.querySelector('.modal').classList.toggle('open')
     document.querySelector('.screen').classList.toggle('on')
     if (document.querySelector('.modal').classList.contains('open')) {
-        setCanvasMeme(elImg)
+        setCanvasMeme(imgId)
         drawMeme()
         renderStickers()
     }
@@ -93,7 +93,7 @@ function onFilterImages(searchTxt) {
     searchTxt = !searchTxt ? document.getElementById("search-box").value : searchTxt
     var foundImages = filterImages(searchTxt.toLowerCase());
     gKeywords[searchTxt] = gKeywords[searchTxt] ? ++gKeywords[searchTxt] : 1
-    rednerPictures(foundImages)
+    rednerMemeImages(foundImages)
     renderSearchedWords()
 }
 
