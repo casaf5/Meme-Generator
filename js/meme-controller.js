@@ -1,3 +1,16 @@
+var gElCanvas
+var gCtx
+var gIsDragging = false;
+
+function init() {
+    gElCanvas = document.getElementById('my-canvas')
+    gCtx = gElCanvas.getContext('2d')
+    startEventListeners()
+    rednerMemeImages()
+    renderSearchedWords()
+    saveToStorage('meme-default', gMeme)
+}
+
 function startEventListeners() {
     gElCanvas.addEventListener("mousedown", (downEv) => {
         gIsDragging = true
@@ -5,18 +18,18 @@ function startEventListeners() {
     })
     gElCanvas.addEventListener("mouseup", () => {
         gIsDragging = false;
-        gElCanvas.removeEventListener('mousemove', setPosition)
+        gElCanvas.removeEventListener('mousemove', onSetPosition)
     })
     document.getElementById('btn-upload').addEventListener('click', () => {
         document.getElementById('file-upload').click()
     })
 }
-function rednerPictures(images) {
-    var images = !images ? getImages() : images;
+function rednerMemeImages(images) {
+    var images = !images ? getMemeImages() : images;
     var elImgCon = document.querySelector('.image-container')
     var strHTML = ''
-    strHTML += images.map(image => {
-        return `<a href="#meme-modal"><img src='images/${image.id}.jpg' 
+    strHTML += images.map((image, idx) => {
+        return `<a href="#meme-modal"><img src='images/${idx + 1}.jpg' 
                 id="${image.id}" onclick="toggleModal(this)"/></a>`
     }).join('')
     elImgCon.innerHTML = strHTML
@@ -47,6 +60,7 @@ function toggleModal(elImg) {
     document.querySelector('.screen').classList.toggle('on')
     if (document.querySelector('.modal').classList.contains('open')) {
         setCanvasMeme(elImg)
+        drawMeme()
         renderStickers()
     }
 }
@@ -68,26 +82,13 @@ function renderSavedMemes() {
         img.height = '300'
         href.download = 'saved-meme'
         href.href = imgUrl
-        img.setAttribute('class','saved-img')
+        img.setAttribute('class', 'saved-img')
         href.appendChild(img)
         elImgCon.appendChild(href)
 
     })
 }
-function onDownloadCanvas(elLink) {
-    const data = gElCanvas.toDataURL();
-    elLink.href = data;
-    elLink.download = 'my-meme';
-    elLink.innerText = 'Downloaded!'
-    elLink.style.backgroundColor = 'green'
 
-}
-function onSaveMeme(elSave) {
-    var meme = gElCanvas.toDataURL()
-    elSave.innerText = 'Meme Saved'
-    elSave.style.backgroundColor = 'green'
-    saveMeme(meme)
-}
 function onFilterImages(searchTxt) {
     searchTxt = !searchTxt ? document.getElementById("search-box").value : searchTxt
     var foundImages = filterImages(searchTxt.toLowerCase());
@@ -96,25 +97,5 @@ function onFilterImages(searchTxt) {
     renderSearchedWords()
 }
 
-function onSetOpacity(value) {
-    document.getElementById('label-opacity').innerText = `Text Opacity : ${value}`
-    changeSettings('opacity', value)
-}
 
-function onStartDrag(downEv) {
-    downEv.preventDefault()
-    if (gIsDragging) {
-        gElCanvas.addEventListener('mousemove', setPosition)
-    }
-}
-function setPosition(ev) {
-    var element = gMeme.focusedEl.element
-    element.posX = ev.offsetX
-    element.posY = ev.offsetY
-    drawMeme()
-}
-
-function onAddSticker(elSticker) {
-    addSticker(elSticker)
-}
 
