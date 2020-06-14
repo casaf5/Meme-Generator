@@ -27,7 +27,7 @@
         </div>
     </header>
     <!-- MODAL -->
-    <div class="modal container flex space-around wrap" id="meme-modal">
+    <div class="modal container flex space-around" id="meme-modal">
         <div class="meme-container flex col space-between ">
             <canvas id="my-canvas" width="500" height="500" style="border:1px solid black;"
                 onmousedown="focusByClick(event)"></canvas>
@@ -101,7 +101,7 @@
                     <input type="color" id="text-color" onchange="onChangeSettings('color',this.value)">
                     <label for="text-bg-color" id="label-opacity">Text-Opacity :100</label>
                     <input type="range" id="text-opacity" min="0" max="100" value="100"
-                        onchange="onSetOpacity(this.value)">
+                        onchange="onChangeOpacity(this.value)">
                 </div>
             </div>
 

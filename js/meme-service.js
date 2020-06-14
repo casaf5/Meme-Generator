@@ -71,12 +71,14 @@ function setCanvasMeme(imgId) {
     var img = gMemeImgs.find(img => img.id === imgId)
     var elImg = new Image();
     elImg.src = img.url;
-    gElCanvas.height = (elImg.height * gElCanvas.width) / elImg.width
-    gMeme.lines[1].posY = gElCanvas.height - 50 //for correct aspect ratio
-    gMeme.elCurrImg = elImg
-    gMeme.focusedEl.element = gMeme.lines[0]
+    elImg.onload = () => {
+        gElCanvas.height = (elImg.height * gElCanvas.width) / elImg.width
+        gMeme.lines[1].posY = gElCanvas.height - 50 //for correct aspect ratio
+        gMeme.elCurrImg = elImg
+        gMeme.focusedEl.element = gMeme.lines[0]
+        drawMeme()
+    }
 }
-
 function addNewTxt() {
     gMeme.lines.push({
         id: genID(),
@@ -114,13 +116,12 @@ function changeElementLocation(diff, posToChange) {
 
 function changeSettings(option, value) {
     if (!gMeme.focusedEl.element) return
+    var focusedOn = getCurrElement()
     if (gMeme.focusedEl.type !== 'line' && option == 'size') {  //for sticker
-        var focusedOn = getCurrElement()
         focusedOn.width += value
         focusedOn.height += value
     } else {
-        var line = gMeme.focusedEl.element
-        line[option] = option !== 'size' ? value : line[option] + value
+        focusedOn[option] = option !== 'size' ? value : focusedOn[option] + value
     }
 }
 

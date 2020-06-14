@@ -73,7 +73,6 @@ function toggleModal(imgId) {
     document.querySelector('.screen').classList.toggle('on')
     if (document.querySelector('.modal').classList.contains('open')) {
         setCanvasMeme(imgId)
-        drawMeme()
         renderStickers()
     }
 }

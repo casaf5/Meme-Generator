@@ -11,7 +11,6 @@ function drawMeme() {
         gCtx.textBaseline = "top"
         gCtx.globalAlpha = line.opacity / 100
         gCtx.fillText(line.txt, line.posX, line.posY)
-        onSetOpacity(line.opacity)
     })
     meme.stickers.forEach(sticker => {
         gCtx.drawImage(sticker.elSticker, sticker.posX, sticker.posY, sticker.width, sticker.height)
@@ -84,11 +83,11 @@ function onSaveMeme(elSave) {
     elSave.style.backgroundColor = 'green'
     saveMeme(meme)
 }
-function onSetOpacity(value) {
+function onChangeOpacity(value) {
     document.getElementById('label-opacity').innerText = `Text Opacity : ${value}`
     changeSettings('opacity', value)
+    drawMeme()
 }
-
 function onStartDrag(downEv) {
     downEv.preventDefault()
     if (gIsDragging) {
@@ -102,7 +101,7 @@ function onSetPosition(ev) {
     if (ev.type === "touchmove") {
         ({ x, y } = getTouchCoords({ x: ev.touches[0].clientX, y: ev.touches[0].clientY }))
     }
-    else { [x,y] = [ev.offsetX, ev.offsetY] }
+    else { [x, y] = [ev.offsetX, ev.offsetY] }
     element.posX = x
     element.posY = y
     drawMeme()
