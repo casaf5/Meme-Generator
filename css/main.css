@@ -303,8 +303,11 @@ a {
         width: 100%;
     }
     .search-bar .fas {
-        top: 24%;
-        left: 71%
+       right:-25%;
+       top:7%;
+    }
+    .search-bar {
+        position: relative;
     }
     .modal {
         flex-direction: column;
