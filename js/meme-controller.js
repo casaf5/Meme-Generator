@@ -104,9 +104,7 @@ function renderSavedMemes() {
 function onFilterImages(searchTxt) {
     // searchTxt = !searchTxt ? document.getElementById("search-box").value : searchTxt
     var foundImages = filterImages(searchTxt.toLowerCase());
-    if (foundImages) {
-        gKeywords[searchTxt] = gKeywords[searchTxt] ? ++gKeywords[searchTxt] : 1
-    }
+    if (foundImages && gKeywords[searchTxt]) ++gKeywords[searchTxt]
     rednerMemeImages(foundImages)
     renderSearchedWords()
 }

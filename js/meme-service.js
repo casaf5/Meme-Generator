@@ -1,5 +1,5 @@
 'use strict';
-var gKeywords = { 'happy': 12, 'man': 20, 'dog': 5, 'kiss': 1, 'hat': 9, 'baby': 20, 'glasses': 20, 'movie': 30, 'lol': 10, 'dance': 20 }
+var gKeywords = { 'happy': 12, 'man': 20, 'dog': 5, 'kiss': 1, 'hat': 9, 'baby': 20, 'glasses': 20, 'movie': 30, 'dance': 20 }
 var gMemeImgs = _createMemeImages()
 var gSavedMemes = []
 var gMeme = {
@@ -31,39 +31,7 @@ var gMeme = {
     stickers: []
 }
 
-function _createMemeImg(id, url, keywords = []) {
-    var newMeme = {
-        id,
-        url,
-        keywords,
-    }
-    return newMeme;
-}
 
-function _createMemeImages() {
-    var memes = []
-    memes.push(_createMemeImg(genID(), 'images/0.jpg', ['dance', 'boy', 'baby']))
-    memes.push(_createMemeImg(genID(), 'images/1.jpg', ['tooth', 'trump', 'donald']))
-    memes.push(_createMemeImg(genID(), 'images/2.jpg', ['dogs', 'lick']))
-    memes.push(_createMemeImg(genID(), 'images/3.jpg', ['baby', 'sleep', 'dog']))
-    memes.push(_createMemeImg(genID(), 'images/4.jpg', ['cat', 'keyboard', 'sleep']))
-    memes.push(_createMemeImg(genID(), 'images/5.jpg', ['win', 'badass', 'baby', 'beach']))
-    memes.push(_createMemeImg(genID(), 'images/6.jpg', ['size', 'professor', 'man', 'hands']))
-    memes.push(_createMemeImg(genID(), 'images/7.jpg', ['shock', 'baby', 'little']))
-    memes.push(_createMemeImg(genID(), 'images/8.jpg', ['hat', 'purpple', 'man']))
-    memes.push(_createMemeImg(genID(), 'images/9.jpg', ['baby', 'happy', 'little']))
-    memes.push(_createMemeImg(genID(), 'images/10.jpg', ['happy', 'laugh', 'barak', 'obama']))
-    memes.push(_createMemeImg(genID(), 'images/11.jpg', ['kiss,man']))
-    memes.push(_createMemeImg(genID(), 'images/12.jpg', ['finger', 'glasses', 'israel', 'hands']))
-    memes.push(_createMemeImg(genID(), 'images/13.jpg', ['cheers', 'leonardo dicaprio', 'wine', 'glass', 'hand']))
-    memes.push(_createMemeImg(genID(), 'images/14.jpg', ['matrix', 'glasses']))
-    memes.push(_createMemeImg(genID(), 'images/15.jpg', ['game of thrones', 'hair', 'hands']))
-    memes.push(_createMemeImg(genID(), 'images/16.jpg', ['movie', 'startrek', 'red shirt', 'hands']))
-    memes.push(_createMemeImg(genID(), 'images/17.jpg', ['vladimir putin', 'russia', 'suit', 'hands']))
-    memes.push(_createMemeImg(genID(), 'images/18.jpg', ['toystory', 'bazz', 'woody', 'movie', 'cartoon']))
-    memes.push(_createMemeImg(genID(), 'images/19.jpg', ['lady', 'nature']))
-    return memes;
-}
 
 function setCanvasMeme(imgId) {
     gMeme = loadFromStorage('meme-default')
@@ -196,7 +164,36 @@ function removeEl() {
     gMeme.focusedEl.element = gMeme.lines[0]
 
 }
+function _createMemeImg(id, url, keywords = []) {
+    var newMeme = {
+        id,
+        url,
+        keywords,
+    }
+    return newMeme;
+}
 
-
-
-
+function _createMemeImages() {
+    var memes = []
+    memes.push(_createMemeImg(genID(), 'images/0.jpg', ['dance', 'boy', 'baby']))
+    memes.push(_createMemeImg(genID(), 'images/1.jpg', ['tooth', 'trump', 'donald']))
+    memes.push(_createMemeImg(genID(), 'images/2.jpg', ['dogs', 'lick']))
+    memes.push(_createMemeImg(genID(), 'images/3.jpg', ['baby', 'sleep', 'dog']))
+    memes.push(_createMemeImg(genID(), 'images/4.jpg', ['cat', 'keyboard', 'sleep']))
+    memes.push(_createMemeImg(genID(), 'images/5.jpg', ['win', 'badass', 'baby', 'beach']))
+    memes.push(_createMemeImg(genID(), 'images/6.jpg', ['size', 'professor', 'man', 'hands']))
+    memes.push(_createMemeImg(genID(), 'images/7.jpg', ['shock', 'baby', 'little']))
+    memes.push(_createMemeImg(genID(), 'images/8.jpg', ['hat', 'purpple', 'man']))
+    memes.push(_createMemeImg(genID(), 'images/9.jpg', ['baby', 'happy', 'little']))
+    memes.push(_createMemeImg(genID(), 'images/10.jpg', ['happy', 'laugh', 'barak', 'obama']))
+    memes.push(_createMemeImg(genID(), 'images/11.jpg', ['kiss,man']))
+    memes.push(_createMemeImg(genID(), 'images/12.jpg', ['finger', 'glasses', 'israel', 'hands']))
+    memes.push(_createMemeImg(genID(), 'images/13.jpg', ['cheers', 'leonardo dicaprio', 'wine', 'glass', 'hand']))
+    memes.push(_createMemeImg(genID(), 'images/14.jpg', ['matrix', 'glasses']))
+    memes.push(_createMemeImg(genID(), 'images/15.jpg', ['game of thrones', 'hair', 'hands']))
+    memes.push(_createMemeImg(genID(), 'images/16.jpg', ['movie', 'startrek', 'red shirt', 'hands']))
+    memes.push(_createMemeImg(genID(), 'images/17.jpg', ['vladimir putin', 'russia', 'suit', 'hands']))
+    memes.push(_createMemeImg(genID(), 'images/18.jpg', ['toystory', 'bazz', 'woody', 'movie', 'cartoon']))
+    memes.push(_createMemeImg(genID(), 'images/19.jpg', ['lady', 'nature']))
+    return memes;
+}

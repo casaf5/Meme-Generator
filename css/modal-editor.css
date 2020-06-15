@@ -13,7 +13,7 @@
     border: 3px solid black;
     visibility: hidden;
     opacity: 0;
-    transition: opacity, transform .8s;
+    transition: opacity, transform .4s;
     z-index: 5;
 }
 
