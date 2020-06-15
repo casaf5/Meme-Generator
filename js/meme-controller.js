@@ -22,12 +22,12 @@ function startEventListeners() {
         gElCanvas.removeEventListener('mousemove', onSetPosition)
     })
     // MOBILE-TOUCH
-    gElCanvas.addEventListener("touchstart",(downEv)=>{
+    gElCanvas.addEventListener("touchstart", (downEv) => {
         focusByClick(downEv)
         gIsDragging = true
         onStartDrag(downEv)
     })
-    gElCanvas.addEventListener("touchend",()=>{
+    gElCanvas.addEventListener("touchend", () => {
         gIsDragging = false
         gElCanvas.removeEventListener("touchmove", onSetPosition)
 
@@ -102,9 +102,11 @@ function renderSavedMemes() {
 }
 
 function onFilterImages(searchTxt) {
-    searchTxt = !searchTxt ? document.getElementById("search-box").value : searchTxt
+    // searchTxt = !searchTxt ? document.getElementById("search-box").value : searchTxt
     var foundImages = filterImages(searchTxt.toLowerCase());
-    gKeywords[searchTxt] = gKeywords[searchTxt] ? ++gKeywords[searchTxt] : 1
+    if (foundImages) {
+        gKeywords[searchTxt] = gKeywords[searchTxt] ? ++gKeywords[searchTxt] : 1
+    }
     rednerMemeImages(foundImages)
     renderSearchedWords()
 }

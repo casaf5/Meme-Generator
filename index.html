@@ -118,8 +118,8 @@
     <main>
         <div class="search container flex space-between">
             <div class="search-bar flex col  ">
-                <input type="text" id="search-box" placeholder="Search Your Meme">
-                <i class="fas fa-search fa-2x" onclick="onFilterImages()"></i>
+                <input type="text" id="search-box" placeholder="Search Your Meme" oninput="onFilterImages(this.value)">
+                <i class="fas fa-search fa-2x" ></i>
                 <input type="file" id="file-upload" hidden="hidden" accept="image/*" onchange="onUserUploadImg(event)"/>
                 <button id="btn-upload" >Upload Image</button>
             </div>
